@@ -1,32 +1,27 @@
 import React, {useRef, useState} from 'react'
-import './Mehmoh.scss'
-import {
-  SCENE_Scoreboard,
-  SCENE_Settings,
-} from '../constants/routes'
-import Menu from './scenes/Scoreboard'
-import Intro from './scenes/Settings'
+import './GameClock.scss'
+import {SCENE_Scoreboard, SCENE_Settings} from '../constants/routes'
+import Scoreboard from './scenes/Scoreboard'
+import Settings from './scenes/Settings'
 import SettingsContext, {
   HydratedSettings,
   flushSettings,
 } from '../SettingsContext'
 
 const SCENE_MAP = {
-  [SCENE_MAZE]: Maze,
-  [SCENE_SIMON]: Simon,
-  [SCENE_MENU]: Menu,
-  [SCENE_INTRO]: Intro,
+  [SCENE_Settings]: Settings,
+  [SCENE_Scoreboard]: Scoreboard,
 }
 
 function GameClock(props) {
   const [settings, setSettings] = useState(HydratedSettings)
   const container = useRef()
-  const [scene, setScene] = useState(SCENE_MENU)
+  const [scene, setScene] = useState(SCENE_Scoreboard)
 
   const Page = SCENE_MAP[scene]
 
   return (
-    <div id="mehmoh" ref={container}>
+    <div id="game-clock" ref={container}>
       <SettingsContext.Provider
         value={{
           ...settings,

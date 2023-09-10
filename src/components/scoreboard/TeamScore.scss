@@ -1,9 +1,32 @@
-.teams-core {
+@use '../../styles/all';
+
+.team-score {
+  padding: all.$spaceMedium;
+  position: relative;
+  &:hover {
+    .team-score-controls {
+      display: block;
+    }
+  }
+
   h3 {
 
   }
 
   p {
+    font-size: 6em;
+  }
 
+  .team-score-controls {
+    @include all.overlay-fill();
+    display: none;
+    font-size: all.$fontSize1;
+
+    .icon-container {
+      display: flex;
+      height: 50%;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

@@ -4,12 +4,12 @@ import {useEffect, useState} from 'react'
 
 const TICK_TIMER = 'score-tick-timer'
 // this is the how long it'll take the very last value to tick, values before will tick faster
-const TIME_TIMEOUT = 300
 
 /**
  * @param {number?} startingValue
+ * @param {number?} tickAmount
  */
-function useTicker(startingValue = 0) {
+function useTicker(startingValue = 0, tickAmount = 1000) {
   const {setTimer, cancelTimer, cancelAllTimers} = useDoOnceTimer()
   const {value, increment, decrement} = useIncrement(startingValue)
   const [ticking, setTicking] = useState(0)
@@ -44,8 +44,6 @@ function useTicker(startingValue = 0) {
         return
       }
 
-      const tickAmount = Math.max(1, Math.round(Math.abs(ticks) / 20))
-
       if (ticks < 0) {
         ticks += tickAmount
         increment(tickAmount)
@@ -55,15 +53,10 @@ function useTicker(startingValue = 0) {
       }
 
       // we recurse to see if there are more ticks to give
-      setTimer(
-        TICK_TIMER,
-        tickScore,
-        // divide by number of ticks so our number eases into the final value
-        Math.abs(TIME_TIMEOUT / ticks),
-      )
+      setTimer(TICK_TIMER, tickScore, tickAmount)
     }
     tickScore()
-  }, [startingValue])
+  }, [startingValue, tickAmount])
 
   return {
     ticking, // -1 = ticking up, +1 = ticking down, 0 = not ticking

@@ -5,14 +5,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
   faChevronRight,
-  faDownload,
   faSpinner,
   faCheck,
   faTimes,
   faChevronUp,
   faChevronDown,
-  faShieldHeart,
-  faFireFlameCurved,
+  faPlay,
+  faStop,
+  faArrowRotateLeft,
+  faPencil,
 } from '@fortawesome/free-solid-svg-icons'
 import {faCircle} from '@fortawesome/free-regular-svg-icons'
 import {constructClassString} from '../../utilities'
@@ -21,13 +22,14 @@ export const CHEVRON_LEFT = faChevronLeft
 export const CHEVRON_RIGHT = faChevronRight
 export const CHEVRON_UP = faChevronUp
 export const CHEVRON_DOWN = faChevronDown
-export const DOWNLOAD = faDownload
 export const SPINNER = faSpinner
 export const CHECK = faCheck
-export const BULLET = faCircle
 export const CLOSE = faTimes
-export const SHIELD = faShieldHeart
-export const FIRE = faFireFlameCurved
+
+export const PLAY = faPlay
+export const STOP = faStop
+export const RESET = faArrowRotateLeft
+export const EDIT = faPencil
 
 function Icon(props) {
   return (

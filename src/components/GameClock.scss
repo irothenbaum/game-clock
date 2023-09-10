@@ -1,0 +1,10 @@
+@use '../styles/all';
+
+#game-clock {
+  height: 100%;
+  width: 100%;
+
+  &, & * {
+    @include all.disable-text-selection();
+  }
+}

@@ -9,6 +9,7 @@ function useIncrement(startingValue) {
       setValue(i => i + Math.max(1, Math.round(amount))),
     decrement: (amount = 1) =>
       setValue(i => i - Math.max(1, Math.round(amount))),
+    change: (amount = 0) => setValue(i => i + Math.round(amount)),
   }
 }
 

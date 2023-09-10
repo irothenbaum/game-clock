@@ -1,48 +1,88 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './Scoreboard.scss'
-import PropTypes from 'prop-types'
 import TeamScore from '../scoreboard/TeamScore'
 import useIncrement from '../../hooks/useIncrement'
 import Clock from '../scoreboard/Clock'
+import useClock from '../../hooks/useClock'
+import GameContext from '../../GameContext'
+import Scores from '../scoreboard/Scores'
+
 function Scoreboard(props) {
+  const {
+    isRunning: isGameClockRunning,
+    stopClock: stopGameClock,
+    startClock: startGameClock,
+    timeRemaining: gameClockRemaining,
+    setClock: setGameClock,
+  } = useClock()
+
+  const {
+    isRunning: isShotClockRunning,
+    stopClock: stopShotClock,
+    startClock: startShotClock,
+    timeRemaining: shotClockRemaining,
+    setClock: setShotClock,
+  } = useClock()
+
   const {
     value: homeScore,
     setValue: setHomeScore,
-    decrement: decHomeScore,
-    increment: incHomeScore,
+    change: changeHomeScore,
   } = useIncrement(0)
 
   const {
     value: visitorScore,
     setValue: setVisitorScore,
-    decrement: decVisitorScore,
-    increment: incVisitorScore,
+    change: changeVisitorScore,
   } = useIncrement(0)
 
-  const {
-    value: gameClock,
-    setValue: setGameClock,
-    decrement: decGameClock,
-    increment: incGameClock,
-  } = useIncrement(0)
+  const handleResetGameClock = () => {}
 
-  const {
-    value: shotClock,
-    setValue: setShotClock,
-    decrement: decShotClock,
-    increment: incShotClock,
-  } = useIncrement(0)
+  const handleResetShotClock = () => {}
 
   return (
-    <div className="scoreboard">
-      <div className="score-container">
-        <TeamScore label={'Home'} score={homeScore} />
-        <TeamScore label={'Visitor'} score={visitorScore} />
-      </div>
+    <GameContext.Provider
+      value={{
+        isGameClockRunning,
+        stopGameClock,
+        startGameClock,
+        gameClockRemaining,
+        setGameClock,
 
-      <Clock className="game-clock" timeMS={gameClock} />
-      <Clock className="shot-clock" timeMS={shotClock} hideMinutes={true} />
-    </div>
+        isShotClockRunning,
+        stopShotClock,
+        startShotClock,
+        shotClockRemaining,
+        setShotClock,
+
+        homeScore,
+        setHomeScore,
+        changeHomeScore,
+        visitorScore,
+        setVisitorScore,
+        changeVisitorScore,
+      }}>
+      <div className="scoreboard">
+        <Scores />
+        <Clock
+          className="game-clock"
+          timeMS={gameClockRemaining}
+          onChange={setGameClock}
+          onStart={startGameClock}
+          onStop={stopGameClock}
+          onReset={handleResetGameClock}
+        />
+        <Clock
+          className="shot-clock"
+          timeMS={shotClockRemaining}
+          hideMinutes={true}
+          onChange={setShotClock}
+          onStart={startShotClock}
+          onStop={stopShotClock}
+          onReset={handleResetShotClock}
+        />
+      </div>
+    </GameContext.Provider>
   )
 }
 

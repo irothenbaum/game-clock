@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import './Clock.scss'
-import {constructClassString} from '../../utilities'
+import {constructClassString, timeMSToParts} from '../../utilities'
+import Icon, {PLAY, EDIT, STOP, RESET} from '../utility/Icon'
+import TimeInput from '../utility/TimeInput'
 
 /**
  * @param {number} num
@@ -12,19 +14,22 @@ function zeroPad(num) {
 }
 
 function Clock(props) {
-  const minutes = Math.floor(props.timeMS / 60000)
-  const seconds = Math.floor((props.timeMS % 60000) / 1000)
-  const milliseconds = Math.floor((props.timeMS % 1000) / 10)
+  const [minutes, seconds, milliseconds] = timeMSToParts(props.timeMS)
   // show MS if we're under 10 seconds left
   const showMilliseconds = props.timeMS < 10000
+
+  const [isEditing, setIsEditing] = useState(false)
 
   return (
     <div className={constructClassString('clock', props.className)}>
       {!props.hideMinutes && (
-        <React.Fragment>
+        <span
+          className={constructClassString({
+            disabled: minutes === 0,
+          })}>
           <span className="minutes">{zeroPad(minutes)}</span>
           <span className="colon">:</span>
-        </React.Fragment>
+        </span>
       )}
       <span className="seconds">{zeroPad(seconds)}</span>
       {showMilliseconds && (
@@ -33,6 +38,25 @@ function Clock(props) {
           <span className="milliseconds">{zeroPad(milliseconds)}</span>
         </React.Fragment>
       )}
+
+      <div className="clock-controls">
+        <span>
+          <Icon icon={RESET} onClick={props.onReset} />
+        </span>
+        <span className="playback-controls">
+          <Icon icon={PLAY} onClick={props.onStart} />
+          <Icon icon={STOP} onClick={props.onStop} />
+        </span>
+        <span>
+          <Icon icon={EDIT} onClick={() => setIsEditing(true)} />
+        </span>
+        <div
+          className={constructClassString('edit-clock', {
+            open: isEditing,
+          })}>
+          <TimeInput value={props.timeMS} onChange={props.onChange} />
+        </div>
+      </div>
     </div>
   )
 }
@@ -41,6 +65,11 @@ Clock.propTypes = {
   timeMS: PropTypes.number.isRequired,
   hideMinutes: PropTypes.bool,
   className: PropTypes.string,
+
+  onReset: PropTypes.func,
+  onStart: PropTypes.func,
+  onStop: PropTypes.func,
+  onChange: PropTypes.func,
 }
 
 export default Clock

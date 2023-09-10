@@ -1,9 +1,9 @@
 import './App.scss'
 import React from 'react'
-import Mehmoh from './components/GameClock'
+import GameClock from './components/GameClock'
 
 function App() {
-  return <Mehmoh />
+  return <GameClock />
 }
 
 export default App

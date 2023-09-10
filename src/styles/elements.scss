@@ -31,13 +31,6 @@
   }
 }
 
-@mixin input-box() {
-  border: 1px solid colors.$grey;
-  padding: layout.$spaceSmall;
-  border-radius: layout.$borderRadiusSmall;
-  line-height: 1.2em;
-}
-
 @mixin disable-text-selection() {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -61,4 +54,15 @@
           transparent 80%, transparent 90%,
           $tintColor 90%, $tintColor 100%,
   )
+}
+
+@mixin overlay-fill($bg: colors.$sunbeamHard) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $bg;
+  border-radius: 6px;
+  z-index: 10;
 }

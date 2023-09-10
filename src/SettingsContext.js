@@ -2,7 +2,8 @@ import {createContext} from 'react'
 const SETTINGS_CACHE_KEY = 'game-clock-settings'
 
 export const DefaultSettings = {
-
+  periodLengthMS: 420000, // 7 minutes
+  shotClockMS: 30000, // 30 seconds
 }
 
 // hydrate from our stored value
