@@ -1,0 +1,64 @@
+@use './constants.scss';
+@use './layout.scss';
+@use './colors.scss';
+
+@mixin hover-cta {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity constants.$transition;
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 1;
+  }
+}
+
+@mixin ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin link-text() {
+  text-decoration: underline;
+  color: colors.$blue;
+  cursor: pointer;
+  transition: color constants.$transition;
+
+  &:hover {
+    color: colors.$lightBlue;
+  }
+}
+
+@mixin input-box() {
+  border: 1px solid colors.$grey;
+  padding: layout.$spaceSmall;
+  border-radius: layout.$borderRadiusSmall;
+  line-height: 1.2em;
+}
+
+@mixin disable-text-selection() {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+@mixin shadow($amount: 10px, $color: colors.$shadowSoft) {
+  box-shadow: 0 0 $amount 0 $color;
+}
+
+@mixin candy-cane-background($deg: 135deg, $tintColor: colors.$shadowExtraSoft) {
+  background-image: linear-gradient(135deg,
+          transparent 0, transparent 10%,
+          $tintColor 10%, $tintColor 20%,
+          transparent 20%, transparent 30%,
+          $tintColor 30%, $tintColor 40%,
+          transparent 40%, transparent 50%,
+          $tintColor 50%, $tintColor 60%,
+          transparent 60%, transparent 70%,
+          $tintColor 70%, $tintColor 80%,
+          transparent 80%, transparent 90%,
+          $tintColor 90%, $tintColor 100%,
+  )
+}

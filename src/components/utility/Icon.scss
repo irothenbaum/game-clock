@@ -1,0 +1,12 @@
+@use '../../styles/all';
+
+.icon-container {
+  &.has-click-handler {
+    @include all.hover-cta();
+  }
+
+  &.spin {
+    animation: rotation 2s infinite linear;
+  }
+}
+

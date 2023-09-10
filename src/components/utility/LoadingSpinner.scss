@@ -1,0 +1,11 @@
+@use '../../styles/all';
+
+.loading-spinner {
+  text-align: center;
+  font-size: all.$fontSize3;
+
+  &.x-small { font-size: all.$fontSize5;}
+  &.small { font-size: all.$fontSize4;}
+  &.large { font-size: all.$fontSize2; }
+  &.x-large { font-size: all.$fontSize1; }
+}

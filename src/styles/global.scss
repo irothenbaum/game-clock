@@ -1,0 +1,21 @@
+@use "reset.css";
+@use "colors";
+@use "typography";
+@use "layout";
+
+
+// UNIVERSAL BOX SIZING
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body {
+  // establish 1rem = 14px
+  font-size: 14px;
+  font-family: typography.$fontFamilyRegular;
+  line-height: 1.3em;
+  width: 100%;
+  height: 100%;
+  color: colors.$copyColor;
+  background-color: colors.$white;
+}
