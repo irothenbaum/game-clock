@@ -6,6 +6,11 @@ function KeyBind(props) {
   const [isFocused, setIsFocused] = useState(false)
 
   const handleKeyDown = e => {
+    if (e.key.length !== 1) {
+      props.onChange(null)
+      return
+    }
+
     try {
       props.onChange(e.key)
 
@@ -18,7 +23,10 @@ function KeyBind(props) {
 
   return (
     <div className="key-bind">
-      <label>{props.label}...........................................</label>
+      <label>
+        {props.label}{' '}
+        ............................................................................................
+      </label>
 
       <input
         type="string"

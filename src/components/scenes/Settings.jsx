@@ -24,7 +24,13 @@ const Settings = forwardRef(function Settings(props, ref) {
   const updateKeyBinding = (action, key) => {
     const duplicates = Object.entries(keyBindings).filter(([a, v]) => v === key)
 
-    if (duplicates.length > 0) {
+    console.log(key)
+
+    if (
+      key &&
+      duplicates.length > 0 &&
+      (duplicates.length > 1 || duplicates[0][0] !== action)
+    ) {
       throw new Error(
         `Key ${key} is already bound to action ${
           actionLabels[duplicates[0][0]]
