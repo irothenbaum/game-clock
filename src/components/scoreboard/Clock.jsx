@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import './Clock.scss'
 import {constructClassString, timeMSToParts} from '../../utilities'
@@ -15,10 +15,19 @@ function zeroPad(num) {
 
 function Clock(props) {
   const [minutes, seconds, milliseconds] = timeMSToParts(props.timeMS)
+  const [cachedTime, setCachedTime] = useState(null)
   // show MS if we're under 10 seconds left
   const showMilliseconds = props.timeMS < 10000
 
   const [isEditing, setIsEditing] = useState(false)
+
+  useEffect(() => {
+    if (isEditing) {
+      setCachedTime(props.timeMS)
+    } else {
+      setCachedTime(null)
+    }
+  }, [isEditing])
 
   return (
     <div className={constructClassString('clock', props.className)}>
@@ -54,7 +63,14 @@ function Clock(props) {
           className={constructClassString('edit-clock', {
             open: isEditing,
           })}>
-          <TimeInput value={props.timeMS} onChange={props.onChange} />
+          <TimeInput
+            value={cachedTime}
+            onChange={v => {
+              props.onChange(v)
+              setIsEditing(false)
+            }}
+            onCancel={() => setIsEditing(false)}
+          />
         </div>
       </div>
     </div>

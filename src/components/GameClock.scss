@@ -7,4 +7,35 @@
   &, & * {
     @include all.disable-text-selection();
   }
+
+  .settings-icon {
+    position: absolute;
+    top: all.$spaceMedium;
+    right: all.$spaceMedium;
+    padding: all.$spaceMedium;
+    font-size: all.$fontSize3;
+    opacity: 0.2;
+
+    &:hover {
+      opacity: 1;
+      animation: rotation 2s infinite linear;
+    }
+  }
+
+  .settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color all.$transition;
+    cursor: pointer;
+    z-index: 100;
+
+    &.open {
+      width: 100%;
+      background-color: all.$shadow;
+    }
+  }
 }

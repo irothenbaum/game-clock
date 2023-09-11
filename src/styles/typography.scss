@@ -23,41 +23,33 @@ $fontFamilyItalic: 'regular-italic';
   src: url('/public/fonts/DMMono-Italic.ttf');
 }
 
-$fontSize1: 2rem;
-$fontSize2: 1.4rem;
-$fontSize3: 1.2rem;
-$fontSize4: 1rem;
-$fontSize5: 0.8rem;
-
-
-// some convenient aliases
-$fontSizeTitle: $fontSize1;
-$fontSizeHeading: $fontSize2;
-$fontSizeSubHeading: $fontSize3;
-$fontSizeBody: $fontSize4;
-$fontSizeFootnote: $fontSize5;
+$fontSize1: 8rem;
+$fontSize2: 6rem;
+$fontSize3: 3rem;
+$fontSize4: 1.5rem;
+$fontSize5: 1rem;
 
 @mixin title {
-  font-size: $fontSizeTitle;
+  font-size: $fontSize2;
   font-family: $fontFamilyLight;
 }
 
 @mixin heading {
-  font-size: $fontSizeHeading;
+  font-size: $fontSize3;
   font-family: $fontFamilyBold;
 }
 
 @mixin subHeading {
-  font-size: $fontSizeSubHeading;
-  font-family: $fontFamilyBold;
+  font-size: $fontSize3;
+  font-family: $fontFamilyRegular;
 }
 
 @mixin body {
-  font-size: $fontSizeBody;
+  font-size: $fontSize4;
   font-family: $fontFamilyRegular;
 }
 
 @mixin footnote {
-  font-size: $fontSizeFootnote;
+  font-size: $fontSize5;
   font-family: $fontFamilyItalic;
 }

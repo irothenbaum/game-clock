@@ -65,4 +65,16 @@
   background-color: $bg;
   border-radius: 6px;
   z-index: 10;
+  opacity: 0;
+  transition: opacity constants.$transition;
+}
+
+@mixin square-icon($width: 42px) {
+  flex-shrink: 0;
+  height: $width;
+  width: $width;
+  text-align: center;
+  line-height: $width;
+  border-radius: 4px;
+  border: 1px solid colors.$shadowSoft;
 }

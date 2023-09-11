@@ -2,10 +2,16 @@ import {useEffect, useRef, useState} from 'react'
 import useDoOnceTimer from './useDoOnceTimer'
 
 const TIMER_KEY = 'timer'
-function useClock(updateInterval = 50) {
+
+/**
+ * @param {number} startingValue
+ * @param {number?} updateInterval
+ * @return {{startClock: startClock, isRunning: boolean, stopClock: stopClock, timeRemaining: number, setClock: setClock}}
+ */
+function useClock(startingValue, updateInterval = 50) {
   const endTimeRef = useRef(null)
   const [isRunning, setIsRunning] = useState(false)
-  const [timeRemaining, setTimeRemaining] = useState(0)
+  const [timeRemaining, setTimeRemaining] = useState(startingValue)
   const {setTimer, cancelTimer} = useDoOnceTimer()
 
   const refreshTimeRemaining = () => {

@@ -1,17 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './NumberInput.scss'
 
 function NumberInput(props) {
   return (
-    <div className="number-input">
-      <input
-        type="number"
-        min="0"
-        max="99"
-        value={props.value}
-        onChange={e => props.onChange(parseInt(e.target.value || 0))}
-      />
-    </div>
+    <input
+      type="numeric"
+      id={props.id}
+      value={('' + (props.value || 0)).padStart(2, '0')}
+      onChange={e => props.onChange(parseInt(e.target.value || 0))}
+    />
   )
 }
 

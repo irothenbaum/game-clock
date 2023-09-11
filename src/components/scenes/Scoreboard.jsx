@@ -1,20 +1,22 @@
-import React from 'react'
+import React, {useContext, forwardRef} from 'react'
 import './Scoreboard.scss'
-import TeamScore from '../scoreboard/TeamScore'
 import useIncrement from '../../hooks/useIncrement'
 import Clock from '../scoreboard/Clock'
 import useClock from '../../hooks/useClock'
 import GameContext from '../../GameContext'
 import Scores from '../scoreboard/Scores'
+import SettingsContext from '../../SettingsContext'
 
-function Scoreboard(props) {
+const Scoreboard = forwardRef(function Scoreboard(props, ref) {
+  const {shotClockMS, periodLengthMS} = useContext(SettingsContext)
+
   const {
     isRunning: isGameClockRunning,
     stopClock: stopGameClock,
     startClock: startGameClock,
     timeRemaining: gameClockRemaining,
     setClock: setGameClock,
-  } = useClock()
+  } = useClock(periodLengthMS)
 
   const {
     isRunning: isShotClockRunning,
@@ -22,7 +24,7 @@ function Scoreboard(props) {
     startClock: startShotClock,
     timeRemaining: shotClockRemaining,
     setClock: setShotClock,
-  } = useClock()
+  } = useClock(shotClockMS)
 
   const {
     value: homeScore,
@@ -35,10 +37,6 @@ function Scoreboard(props) {
     setValue: setVisitorScore,
     change: changeVisitorScore,
   } = useIncrement(0)
-
-  const handleResetGameClock = () => {}
-
-  const handleResetShotClock = () => {}
 
   return (
     <GameContext.Provider
@@ -62,15 +60,25 @@ function Scoreboard(props) {
         setVisitorScore,
         changeVisitorScore,
       }}>
-      <div className="scoreboard">
+      <div className="scoreboard" ref={ref}>
         <Scores />
         <Clock
           className="game-clock"
           timeMS={gameClockRemaining}
           onChange={setGameClock}
-          onStart={startGameClock}
-          onStop={stopGameClock}
-          onReset={handleResetGameClock}
+          onStart={() => {
+            // whenever the game clock starts or stop, so too does the shot clock
+            startGameClock()
+            startShotClock()
+          }}
+          onStop={() => {
+            stopGameClock()
+            stopShotClock()
+          }}
+          onReset={() => {
+            stopGameClock()
+            setGameClock(periodLengthMS)
+          }}
         />
         <Clock
           className="shot-clock"
@@ -79,12 +87,15 @@ function Scoreboard(props) {
           onChange={setShotClock}
           onStart={startShotClock}
           onStop={stopShotClock}
-          onReset={handleResetShotClock}
+          onReset={() => {
+            stopShotClock()
+            setShotClock(shotClockMS)
+          }}
         />
       </div>
     </GameContext.Provider>
   )
-}
+})
 
 Scoreboard.propTypes = {}
 

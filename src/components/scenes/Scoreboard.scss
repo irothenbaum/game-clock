@@ -12,10 +12,12 @@
   background-color: all.$offWhite;
 
   .game-clock {
-    font-size: 8em;
+    font-size: all.$fontSize1;
   }
 
   .shot-clock {
-    font-size: 6em;
+    font-size: all.$fontSize2;
+
+    min-width: 300px;
   }
 }

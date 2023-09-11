@@ -1,38 +1,49 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import './GameClock.scss'
-import {SCENE_Scoreboard, SCENE_Settings} from '../constants/routes'
 import Scoreboard from './scenes/Scoreboard'
 import Settings from './scenes/Settings'
 import SettingsContext, {
   HydratedSettings,
   flushSettings,
 } from '../SettingsContext'
-
-const SCENE_MAP = {
-  [SCENE_Settings]: Settings,
-  [SCENE_Scoreboard]: Scoreboard,
-}
+import Icon, {SETTINGS} from './utility/Icon'
+import {constructClassString} from '../utilities'
 
 function GameClock(props) {
   const [settings, setSettings] = useState(HydratedSettings)
-  const container = useRef()
-  const [scene, setScene] = useState(SCENE_Scoreboard)
-
-  const Page = SCENE_MAP[scene]
+  const scoreBoardRef = useRef()
+  const [showSettings, setShowSettings] = useState(false)
 
   return (
-    <div id="game-clock" ref={container}>
+    <div id="game-clock">
       <SettingsContext.Provider
         value={{
           ...settings,
-          updateSettings: obj =>
+          updateSettings: obj => {
+            console.log(obj)
             setSettings(s => {
               const updatedValue = {...s, ...obj}
               flushSettings(updatedValue)
               return updatedValue
-            }),
+            })
+          },
         }}>
-        <Page onNavigate={setScene} />
+        <Scoreboard ref={scoreBoardRef} />
+        <Icon
+          icon={SETTINGS}
+          className="settings-icon"
+          onClick={() => setShowSettings(true)}
+        />
+        <div
+          className={constructClassString('settings-overlay', {
+            open: showSettings,
+          })}
+          onClick={() => setShowSettings(false)}
+        />
+        <Settings
+          isOpen={showSettings}
+          onClose={() => setShowSettings(false)}
+        />
       </SettingsContext.Provider>
     </div>
   )
