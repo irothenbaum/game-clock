@@ -10,7 +10,7 @@ export const DefaultGame = {
 
 // hydrate from our stored value
 const storedValue = localStorage[GAME_CACHE_KEY]
-export const HydratedSettings = storedValue
+export const HydratedGame = storedValue
   ? {...DefaultGame, ...JSON.parse(storedValue)}
   : DefaultGame
 

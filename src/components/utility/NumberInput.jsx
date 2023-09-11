@@ -1,21 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './NumberInput.scss'
+import {inputProps} from '../../constants/propTypes'
+import {constructClassString} from '../../utilities'
 
-function NumberInput(props) {
+function NumberInput({value, onChange, padDigits, className, ...rest}) {
+  const valueFormatted = ('' + (value || 0)).padStart(padDigits || 0, '0')
+
   return (
-    <input
-      type="numeric"
-      id={props.id}
-      value={('' + (props.value || 0)).padStart(2, '0')}
-      onChange={e => props.onChange(parseInt(e.target.value || 0))}
-    />
+    <div className={constructClassString('number-input', className)}>
+      <input
+        type="numeric"
+        value={valueFormatted}
+        onChange={e => onChange(parseInt(e.target.value || 0))}
+        {...rest}
+      />
+    </div>
   )
 }
 
 NumberInput.propTypes = {
-  value: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
+  ...inputProps,
+  value: PropTypes.number,
+  padDigits: PropTypes.number,
 }
 
 export default NumberInput

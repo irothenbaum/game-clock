@@ -1,6 +1,6 @@
 @use '../../styles/all';
 
-.number-input {
+.string-input {
   width: 100%;
   input {
     @include all.input-box();

@@ -12,17 +12,18 @@
     overflow: hidden;
     margin-right: all.$spaceMedium;
   }
-  input {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    padding: 0;
-    text-align: center;
-    font-size: 2rem;
-    border: 1px solid all.$lightGrey;
 
-    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: all.$lightGrey;
+  .string-input {
+    width: auto;
+    input {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 2rem;
+
+      &::placeholder {
+        color: all.$lightGrey;
+      }
     }
   }
 }

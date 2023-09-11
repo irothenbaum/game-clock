@@ -63,7 +63,9 @@ function Clock(props) {
           className={constructClassString({
             disabled: minutes === 0,
           })}>
-          <span className="minutes">{zeroPad(minutes)}</span>
+          <span className="minutes">
+            {minutes > 0 ? minutes : zeroPad(minutes)}
+          </span>
           <span className="colon">:</span>
         </span>
       )}

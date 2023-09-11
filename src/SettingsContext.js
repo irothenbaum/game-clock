@@ -5,6 +5,7 @@ export const DefaultSettings = {
   periodLengthMS: 420000, // 7 minutes
   shotClockMS: 30000, // 30 seconds
   keyBindings: {},
+  quickActions: [],
 
   isSettingsPanelOpen: false, // this one doesn't really fit, but it's a good place to put it
 }

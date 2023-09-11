@@ -48,7 +48,11 @@ function TimeInput(props) {
       <div className="time-input-inner">
         <NumberInput value={minutes} onChange={handleChangeMinutes} />
         <span>:</span>
-        <NumberInput value={seconds} onChange={handleChangeSeconds} />
+        <NumberInput
+          value={seconds}
+          onChange={handleChangeSeconds}
+          padDigits={2}
+        />
       </div>
 
       <Icon icon={CHECK} onClick={handleSave} />

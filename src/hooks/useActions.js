@@ -9,7 +9,7 @@ import {
   ACTION_INCREASE_VISITOR_SCORE,
   ACTION_START_GAME_CLOCK,
   ACTION_STOP_GAME_CLOCK,
-} from '../constants/keystrokes'
+} from '../constants/actions'
 
 /**
  * @return {{execute: function(string): void}}

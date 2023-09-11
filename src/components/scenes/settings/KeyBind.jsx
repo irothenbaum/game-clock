@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './KeyBind.scss'
 import PropTypes from 'prop-types'
+import StringInput from '../../utility/StringInput'
 
 function KeyBind(props) {
   const [isFocused, setIsFocused] = useState(false)
@@ -28,8 +29,7 @@ function KeyBind(props) {
         ............................................................................................
       </label>
 
-      <input
-        type="string"
+      <StringInput
         value={isFocused ? '' : props.value || ''}
         placeholder={isFocused ? '' : '-'}
         onFocus={() => setIsFocused(true)}

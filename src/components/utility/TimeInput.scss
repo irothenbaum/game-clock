@@ -14,11 +14,13 @@
     text-align: center;
     font-size: all.$fontSize3;
 
-    input {
+    .number-input {
       width: 40%;
-      display: block;
-      text-align: center;
-      -webkit-appearance: none;
+
+      input {
+        text-align: center;
+        width: 100%;
+      }
     }
   }
 

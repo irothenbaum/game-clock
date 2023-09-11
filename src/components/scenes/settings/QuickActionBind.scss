@@ -1,0 +1,15 @@
+@use '../../../styles/all';
+
+.quick-action-bind {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > * {
+    margin-right: all.$spaceSmall;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

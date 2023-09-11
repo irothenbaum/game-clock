@@ -4,9 +4,15 @@ import PropTypes from 'prop-types'
 import {constructClassString} from '../../utilities'
 import TimeInput from '../utility/TimeInput'
 import SettingsContext from '../../SettingsContext'
-import Icon, {CLOSE} from '../utility/Icon'
-import {actionLabels} from '../../constants/keystrokes'
+import Icon, {PLUS, CLOSE, STOPWATCH} from '../utility/Icon'
+import {
+  ACTION_SET_GAME_CLOCK,
+  actionLabels,
+  singleClickActions,
+} from '../../constants/actions'
 import KeyBind from './settings/KeyBind'
+import QuickActionBind from './settings/QuickActionBind'
+import TextCTA from '../utility/TextCTA'
 
 const Settings = forwardRef(function Settings(props, ref) {
   const {
@@ -15,6 +21,7 @@ const Settings = forwardRef(function Settings(props, ref) {
     isSettingsPanelOpen,
     keyBindings,
     updateSettings,
+    quickActions,
   } = useContext(SettingsContext)
 
   /**
@@ -23,9 +30,6 @@ const Settings = forwardRef(function Settings(props, ref) {
    */
   const updateKeyBinding = (action, key) => {
     const duplicates = Object.entries(keyBindings).filter(([a, v]) => v === key)
-
-    console.log(key)
-
     if (
       key &&
       duplicates.length > 0 &&
@@ -43,6 +47,29 @@ const Settings = forwardRef(function Settings(props, ref) {
 
     updateSettings({
       keyBindings: clone,
+    })
+  }
+
+  /**
+   * @param {QuickAction} a
+   * @param {number} index
+   */
+  const handleChangeQuickAction = (a, index) => {
+    const clone = [...quickActions]
+    clone[index] = a
+    updateSettings({
+      quickActions: clone,
+    })
+  }
+
+  /**
+   * @param {number} index
+   */
+  const removeQuickAction = index => {
+    const clone = [...quickActions]
+    clone.splice(index, 1)
+    updateSettings({
+      quickActions: clone,
     })
   }
 
@@ -81,12 +108,38 @@ const Settings = forwardRef(function Settings(props, ref) {
       </div>
 
       <div className="section">
+        <h3>Quick Links</h3>
+        {quickActions.map((action, index) => {
+          return (
+            <div
+              className="quick-action-entry"
+              key={`${action.label}-${index}`}>
+              <QuickActionBind
+                value={action}
+                onChange={a => handleChangeQuickAction(a, index)}
+              />
+              <Icon
+                className="remove-quick-action-button"
+                icon={CLOSE}
+                onClick={() => removeQuickAction(index)}
+              />
+            </div>
+          )
+        })}
+        <TextCTA
+          icon={PLUS}
+          onClick={() => handleChangeQuickAction({}, quickActions.length)}
+          label={'Create new quick action'}
+        />
+      </div>
+
+      <div className="section">
         <h3>Key Bindings</h3>
-        {Object.entries(actionLabels).map(([action, label]) => {
+        {singleClickActions.map(action => {
           return (
             <KeyBind
               key={action}
-              label={label}
+              label={actionLabels[action]}
               value={keyBindings[action]}
               onChange={s => updateKeyBinding(action, s)}
             />

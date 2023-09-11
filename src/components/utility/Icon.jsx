@@ -12,9 +12,11 @@ import {
   faChevronDown,
   faPlay,
   faPause,
-  faArrowRotateLeft,
+  faClockRotateLeft,
   faPencil,
   faGear,
+  faStopwatch,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons'
 import {faCircle} from '@fortawesome/free-regular-svg-icons'
 import {constructClassString} from '../../utilities'
@@ -28,9 +30,11 @@ export const CHECK = faCheck
 export const CLOSE = faTimes
 export const PLAY = faPlay
 export const STOP = faPause
-export const RESET = faArrowRotateLeft
+export const RESET = faClockRotateLeft
 export const EDIT = faPencil
 export const SETTINGS = faGear
+export const STOPWATCH = faStopwatch
+export const PLUS = faPlus
 
 function Icon(props) {
   return (

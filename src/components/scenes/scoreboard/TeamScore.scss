@@ -20,7 +20,7 @@
   .team-score-controls {
     @include all.overlay-fill();
     font-size: 2rem;
-    border: 1px solid all.$shadowSoft;
+    border: 1px solid all.$lightGrey;
     border-radius: 6px;
     overflow: hidden;
 
