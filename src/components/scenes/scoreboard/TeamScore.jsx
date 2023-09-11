@@ -1,7 +1,7 @@
 import React from 'react'
 import './TeamScore.scss'
 import PropTypes from 'prop-types'
-import Icon, {CHEVRON_DOWN, CHEVRON_UP} from '../utility/Icon'
+import Icon, {CHEVRON_DOWN, CHEVRON_UP} from '../../utility/Icon'
 
 function TeamScore(props) {
   return (

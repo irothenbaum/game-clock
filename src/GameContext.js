@@ -4,14 +4,14 @@ const GAME_CACHE_KEY = 'game-clock-game'
 export const DefaultGame = {
   homeScore: 0,
   visitorScore: 0,
-  shotClockMS: 0,
-  gameClockMS: 0,
+  shotClockRemaining: 0,
+  gameClockRemaining: 0,
 }
 
 // hydrate from our stored value
 const storedValue = localStorage[GAME_CACHE_KEY]
 export const HydratedSettings = storedValue
-  ? JSON.parse(storedValue)
+  ? {...DefaultGame, ...JSON.parse(storedValue)}
   : DefaultGame
 
 /**
@@ -19,6 +19,8 @@ export const HydratedSettings = storedValue
  * @param {*} obj
  */
 export const flushGame = obj => {
+  console.log('FLIUSHING GAME', obj)
+
   localStorage[GAME_CACHE_KEY] = JSON.stringify(obj)
 }
 

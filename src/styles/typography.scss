@@ -23,11 +23,11 @@ $fontFamilyItalic: 'regular-italic';
   src: url('/public/fonts/DMMono-Italic.ttf');
 }
 
-$fontSize1: 8rem;
-$fontSize2: 6rem;
-$fontSize3: 3rem;
-$fontSize4: 1.5rem;
-$fontSize5: 1rem;
+$fontSize1: 6.5rem;
+$fontSize2: 5rem;
+$fontSize3: 2.5rem;
+$fontSize4: 1.2rem;
+$fontSize5: 0.8rem;
 
 @mixin title {
   font-size: $fontSize2;
@@ -40,7 +40,7 @@ $fontSize5: 1rem;
 }
 
 @mixin subHeading {
-  font-size: $fontSize3;
+  font-size: 2.2rem;
   font-family: $fontFamilyRegular;
 }
 

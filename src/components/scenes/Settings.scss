@@ -9,7 +9,8 @@
   background-color: all.$offWhite;
   max-width: all.$screenLargeMin;
   z-index: 100;
-  padding: all.$spaceLarge;
+  padding: all.$spaceLarge 0;
+  overflow-y: auto;
   @include all.shadow(0px);
 
   transform: translateX(100%);
@@ -30,7 +31,19 @@
 
   h2 {
     @include all.heading();
+    padding-left: all.$spaceLarge;
     margin-bottom: all.$spaceLarge;
+  }
+
+  h3 {
+    @include all.subHeading();
+    margin-bottom: all.$spaceLarge;
+  }
+
+  .section {
+    margin-top: all.$spaceLarge;
+    padding: all.$spaceLarge;
+    border-top: 1px solid all.$lightGrey;
   }
 
   .row {
@@ -39,7 +52,12 @@
     label {
       display: block;
       margin-bottom: all.$spaceSmall;
+      font-size: all.$fontSize4;
     }
+  }
+
+  .key-bind {
+    margin-top: all.$spaceSmall;
   }
 }
 

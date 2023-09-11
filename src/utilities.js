@@ -25,7 +25,7 @@ export function constructClassString(...classes) {
  * @param {number} timeMS
  * @returns {Array<number>}
  */
-export function timeMSToParts(timeMS) {
+export function timeMSToParts(timeMS = 0) {
   const minutes = Math.floor(timeMS / 60000)
   const seconds = Math.floor((timeMS % 60000) / 1000)
   const milliseconds = Math.floor((timeMS % 1000) / 10)

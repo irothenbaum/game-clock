@@ -1,14 +1,17 @@
-import React, {useContext, forwardRef} from 'react'
+import React, {useContext, forwardRef, useEffect} from 'react'
 import './Scoreboard.scss'
 import useIncrement from '../../hooks/useIncrement'
-import Clock from '../scoreboard/Clock'
+import Clock from './scoreboard/Clock'
 import useClock from '../../hooks/useClock'
-import GameContext from '../../GameContext'
-import Scores from '../scoreboard/Scores'
+import GameContext, {flushGame} from '../../GameContext'
+import Scores from './scoreboard/Scores'
 import SettingsContext from '../../SettingsContext'
+import KeystrokeHandler from './scoreboard/KeystrokeHandler'
+import useDoOnceTimer from '../../hooks/useDoOnceTimer'
 
 const Scoreboard = forwardRef(function Scoreboard(props, ref) {
   const {shotClockMS, periodLengthMS} = useContext(SettingsContext)
+  const {setTimer} = useDoOnceTimer()
 
   const {
     isRunning: isGameClockRunning,
@@ -38,6 +41,23 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
     change: changeVisitorScore,
   } = useIncrement(0)
 
+  // TODO: Trying to implement some local caching in case screen gets refreshed
+  // useEffect(() => {
+  //   const flushTimer = () => {
+  //     flushGame({
+  //       homeScore,
+  //       visitorScore,
+  //       shotClockRemaining,
+  //       gameClockRemaining,
+  //     })
+  //
+  //     // every 10 seconds
+  //     setTimer('save-game-timer', flushTimer, 10000)
+  //   }
+  //
+  //   flushTimer()
+  // }, [])
+
   return (
     <GameContext.Provider
       value={{
@@ -61,8 +81,10 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
         changeVisitorScore,
       }}>
       <div className="scoreboard" ref={ref}>
+        <KeystrokeHandler />
         <Scores />
         <Clock
+          isRunning={isGameClockRunning}
           className="game-clock"
           timeMS={gameClockRemaining}
           onChange={setGameClock}
@@ -76,11 +98,13 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
             stopShotClock()
           }}
           onReset={() => {
+            // when we reset the game clock, we also stop it
             stopGameClock()
             setGameClock(periodLengthMS)
           }}
         />
         <Clock
+          isRunning={isShotClockRunning}
           className="shot-clock"
           timeMS={shotClockRemaining}
           hideMinutes={true}

@@ -1,4 +1,4 @@
-@use '../../styles/all';
+@use '../../../styles/all';
 
 
 .clock {
@@ -8,6 +8,30 @@
   &:hover {
     .clock-controls {
       opacity: 1;
+    }
+  }
+
+  &.start, &.stop {
+    &:hover {
+      .clock-controls {
+        opacity: 0;
+      }
+    }
+
+    .animate-effect {
+      display: flex;
+    }
+  }
+
+  &.stop {
+    .animate-effect {
+      color: all.$red;
+    }
+  }
+
+  &.start {
+    .animate-effect {
+      color: all.$green;
     }
   }
 
@@ -68,5 +92,30 @@
         height: 100%;
       }
     }
+  }
+
+  .animate-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    .icon-container {
+      animation: grow 0.3s linear forwards;
+    }
+  }
+}
+
+@keyframes grow {
+  from {
+    opacity: 1;
+    transform: scale(0.5);
+  } to {
+    opacity: 0;
+    transform: scale(2);
   }
 }

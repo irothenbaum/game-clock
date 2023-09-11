@@ -12,38 +12,34 @@ import {constructClassString} from '../utilities'
 function GameClock(props) {
   const [settings, setSettings] = useState(HydratedSettings)
   const scoreBoardRef = useRef()
-  const [showSettings, setShowSettings] = useState(false)
+  const updateSettings = obj => {
+    setSettings(s => {
+      const updatedValue = {...s, ...obj}
+      flushSettings(updatedValue)
+      return updatedValue
+    })
+  }
 
   return (
     <div id="game-clock">
       <SettingsContext.Provider
         value={{
           ...settings,
-          updateSettings: obj => {
-            console.log(obj)
-            setSettings(s => {
-              const updatedValue = {...s, ...obj}
-              flushSettings(updatedValue)
-              return updatedValue
-            })
-          },
+          updateSettings: updateSettings,
         }}>
         <Scoreboard ref={scoreBoardRef} />
         <Icon
           icon={SETTINGS}
           className="settings-icon"
-          onClick={() => setShowSettings(true)}
+          onClick={() => updateSettings({isSettingsPanelOpen: true})}
         />
         <div
           className={constructClassString('settings-overlay', {
-            open: showSettings,
+            open: settings.isSettingsPanelOpen,
           })}
-          onClick={() => setShowSettings(false)}
+          onClick={() => updateSettings({isSettingsPanelOpen: false})}
         />
-        <Settings
-          isOpen={showSettings}
-          onClose={() => setShowSettings(false)}
-        />
+        <Settings />
       </SettingsContext.Provider>
     </div>
   )
