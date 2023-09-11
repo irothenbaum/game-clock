@@ -14,7 +14,7 @@ export const DefaultSettings = {
 // hydrate from our stored value
 const storedValue = localStorage[SETTINGS_CACHE_KEY]
 
-const storedObject = JSON.parse(storedValue)
+const storedObject = storedValue ? JSON.parse(storedValue) : null
 
 if (storedObject) {
   // here we remove any dead links between quickActions and keybindings
