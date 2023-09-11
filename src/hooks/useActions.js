@@ -9,10 +9,12 @@ import {
   ACTION_INCREASE_VISITOR_SCORE,
   ACTION_START_GAME_CLOCK,
   ACTION_STOP_GAME_CLOCK,
+  ACTION_SET_GAME_CLOCK,
+  ACTION_SET_SHOT_CLOCK,
 } from '../constants/actions'
 
 /**
- * @return {{execute: function(string): void}}
+ * @return {{execute: function(string, number?): void}}
  */
 function useActions() {
   const {
@@ -22,12 +24,15 @@ function useActions() {
     startShotClock,
     changeHomeScore,
     changeVisitorScore,
+    setGameClock,
+    setShotClock,
   } = useContext(GameContext)
 
   /**
    * @param {string} action
+   * @param {number?} magnitude
    */
-  const execute = action => {
+  const execute = (action, magnitude) => {
     switch (action) {
       case ACTION_START_SHOT_CLOCK:
         startShotClock()
@@ -63,6 +68,14 @@ function useActions() {
 
       case ACTION_INCREASE_VISITOR_SCORE:
         changeVisitorScore(1)
+        break
+
+      case ACTION_SET_GAME_CLOCK:
+        setGameClock(magnitude)
+        break
+
+      case ACTION_SET_SHOT_CLOCK:
+        setShotClock(magnitude)
         break
 
       default:

@@ -1,4 +1,5 @@
 import {createContext} from 'react'
+import {keyBindingPropToQuickActionIndex} from './utilities'
 const SETTINGS_CACHE_KEY = 'game-clock-settings'
 
 export const DefaultSettings = {
@@ -12,15 +13,31 @@ export const DefaultSettings = {
 
 // hydrate from our stored value
 const storedValue = localStorage[SETTINGS_CACHE_KEY]
-export const HydratedSettings = storedValue
-  ? {...DefaultSettings, ...JSON.parse(storedValue)}
+
+const storedObject = JSON.parse(storedValue)
+
+if (storedObject) {
+  // here we remove any dead links between quickActions and keybindings
+  Object.keys(storedObject.keyBindings).forEach(key => {
+    const index = keyBindingPropToQuickActionIndex(key)
+    // if the keybinding index of this quick action is greater than the length of the quick actions array, then it has been removed
+    if (index >= storedObject.quickActions.length) {
+      delete storedObject.keyBindings[key]
+    }
+  })
+
+  flushSettings(storedObject)
+}
+
+export const HydratedSettings = storedObject
+  ? {...DefaultSettings, ...storedObject}
   : DefaultSettings
 
 /**
  * A function to write to storage. This is called whenever a settings change is made
  * @param {*} obj
  */
-export const flushSettings = obj => {
+export function flushSettings(obj) {
   localStorage[SETTINGS_CACHE_KEY] = JSON.stringify(obj)
 }
 

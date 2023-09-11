@@ -17,6 +17,12 @@ import {
   faGear,
   faStopwatch,
   faPlus,
+  faHourglass,
+  faHourglassStart,
+  faHourglassEnd,
+  faHourglassHalf,
+  faClock,
+  faSquare,
 } from '@fortawesome/free-solid-svg-icons'
 import {faCircle} from '@fortawesome/free-regular-svg-icons'
 import {constructClassString} from '../../utilities'
@@ -35,6 +41,13 @@ export const EDIT = faPencil
 export const SETTINGS = faGear
 export const STOPWATCH = faStopwatch
 export const PLUS = faPlus
+export const HOURGLASS_1 = faHourglass
+export const HOURGLASS_2 = faHourglassStart
+export const HOURGLASS_3 = faHourglassHalf
+export const HOURGLASS_4 = faHourglassEnd
+export const CLOCK = faClock
+export const CIRCLE = faCircle
+export const SQUARE = faSquare
 
 function Icon(props) {
   return (

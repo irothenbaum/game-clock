@@ -1,15 +1,15 @@
 import React, {forwardRef, useContext} from 'react'
 import './Settings.scss'
 import PropTypes from 'prop-types'
-import {constructClassString} from '../../utilities'
+import {
+  constructClassString,
+  filterCompletedQuickActions,
+  quickActionToKeyBindingProp,
+} from '../../utilities'
 import TimeInput from '../utility/TimeInput'
 import SettingsContext from '../../SettingsContext'
 import Icon, {PLUS, CLOSE, STOPWATCH} from '../utility/Icon'
-import {
-  ACTION_SET_GAME_CLOCK,
-  actionLabels,
-  singleClickActions,
-} from '../../constants/actions'
+import {actionLabels, singleClickActions} from '../../constants/actions'
 import KeyBind from './settings/KeyBind'
 import QuickActionBind from './settings/QuickActionBind'
 import TextCTA from '../utility/TextCTA'
@@ -23,6 +23,8 @@ const Settings = forwardRef(function Settings(props, ref) {
     updateSettings,
     quickActions,
   } = useContext(SettingsContext)
+
+  const filteredActions = quickActions.filter(filterCompletedQuickActions)
 
   /**
    * @param {string} action
@@ -109,23 +111,19 @@ const Settings = forwardRef(function Settings(props, ref) {
 
       <div className="section">
         <h3>Quick Links</h3>
-        {quickActions.map((action, index) => {
-          return (
-            <div
-              className="quick-action-entry"
-              key={`${action.label}-${index}`}>
-              <QuickActionBind
-                value={action}
-                onChange={a => handleChangeQuickAction(a, index)}
-              />
-              <Icon
-                className="remove-quick-action-button"
-                icon={CLOSE}
-                onClick={() => removeQuickAction(index)}
-              />
-            </div>
-          )
-        })}
+        {quickActions.map((qA, index) => (
+          <div className="quick-action-entry" key={index}>
+            <QuickActionBind
+              value={qA}
+              onChange={a => handleChangeQuickAction(a, index)}
+            />
+            <Icon
+              className="remove-quick-action-button"
+              icon={CLOSE}
+              onClick={() => removeQuickAction(index)}
+            />
+          </div>
+        ))}
         <TextCTA
           icon={PLUS}
           onClick={() => handleChangeQuickAction({}, quickActions.length)}
@@ -135,16 +133,30 @@ const Settings = forwardRef(function Settings(props, ref) {
 
       <div className="section">
         <h3>Key Bindings</h3>
-        {singleClickActions.map(action => {
-          return (
-            <KeyBind
-              key={action}
-              label={actionLabels[action]}
-              value={keyBindings[action]}
-              onChange={s => updateKeyBinding(action, s)}
-            />
-          )
-        })}
+        {singleClickActions.map(action => (
+          <KeyBind
+            key={action}
+            label={actionLabels[action]}
+            value={keyBindings[action]}
+            onChange={s => updateKeyBinding(action, s)}
+          />
+        ))}
+        {filteredActions.length > 0 && (
+          <React.Fragment>
+            <hr />
+            {filteredActions.map((quickAction, index) => {
+              const keyBindingProp = quickActionToKeyBindingProp(index)
+              return (
+                <KeyBind
+                  key={quickAction.label}
+                  label={quickAction.label}
+                  value={keyBindings[keyBindingProp]}
+                  onChange={s => updateKeyBinding(keyBindingProp, s)}
+                />
+              )
+            })}
+          </React.Fragment>
+        )}
       </div>
     </div>
   )

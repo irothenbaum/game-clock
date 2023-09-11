@@ -44,6 +44,10 @@
     margin-top: all.$spaceLarge;
     padding: all.$spaceLarge;
     border-top: 1px solid all.$lightGrey;
+
+    hr {
+      margin: all.$spaceLarge 0;
+    }
   }
 
   .row {

@@ -5,6 +5,11 @@
   align-items: center;
   justify-content: space-between;
 
+  .number-input {
+    flex-shrink: 0;
+    width: 60px;
+  }
+
   & > * {
     margin-right: all.$spaceSmall;
 

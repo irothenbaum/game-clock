@@ -1,0 +1,25 @@
+@use '../../../styles/all';
+
+.quick-actions {
+  position: fixed;
+  bottom: all.$spaceMedium;
+  left: all.$spaceMedium;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  .icon-container {
+    @include all.square-icon(60px);
+    border-radius: 50%;
+    background-color: all.$white;
+    font-size: 2rem;
+    margin-right: all.$spaceMedium;
+    @include all.shadow(0px);
+    transition: all all.$transition;
+
+    &:hover {
+      @include all.shadow(10px)
+    }
+  }
+}

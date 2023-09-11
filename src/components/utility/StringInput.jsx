@@ -9,7 +9,7 @@ function StringInput({value, onChange, className, ...rest}) {
     <div className={constructClassString('string-input', className)}>
       <input
         type="text"
-        value={value}
+        value={value || ''}
         onChange={e => onChange(e.target.value)}
         {...rest}
       />

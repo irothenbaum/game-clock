@@ -8,6 +8,7 @@ import Scores from './scoreboard/Scores'
 import SettingsContext from '../../SettingsContext'
 import KeystrokeHandler from './scoreboard/KeystrokeHandler'
 import useDoOnceTimer from '../../hooks/useDoOnceTimer'
+import QuickActions from './scoreboard/QuickActions'
 
 const Scoreboard = forwardRef(function Scoreboard(props, ref) {
   const {shotClockMS, periodLengthMS} = useContext(SettingsContext)
@@ -83,6 +84,7 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
       <div className="scoreboard" ref={ref}>
         <KeystrokeHandler />
         <Scores />
+        <QuickActions />
         <Clock
           isRunning={isGameClockRunning}
           className="game-clock"

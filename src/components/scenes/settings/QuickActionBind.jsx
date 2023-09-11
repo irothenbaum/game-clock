@@ -5,7 +5,22 @@ import IconSelector from '../../utility/IconSelector'
 import StringInput from '../../utility/StringInput'
 import SelectInput from '../../utility/SelectInput'
 import NumberInput from '../../utility/NumberInput'
-import {STOPWATCH, CHECK, CLOSE} from '../../utility/Icon'
+import {
+  STOPWATCH,
+  HOURGLASS_3,
+  HOURGLASS_1,
+  HOURGLASS_2,
+  HOURGLASS_4,
+  CLOCK,
+  CIRCLE,
+  SQUARE,
+  CHEVRON_LEFT,
+  CHEVRON_UP,
+  CHEVRON_DOWN,
+  CHEVRON_RIGHT,
+  CHECK,
+  CLOSE,
+} from '../../utility/Icon'
 import {actionLabels, customizableActions} from '../../../constants/actions'
 
 /**
@@ -24,7 +39,22 @@ function QuickActionBind(props) {
       <IconSelector
         value={value.icon}
         onChange={i => props.onChange({...value, icon: i})}
-        options={[STOPWATCH, CHECK, CLOSE]}
+        options={[
+          STOPWATCH,
+          HOURGLASS_3,
+          HOURGLASS_1,
+          HOURGLASS_2,
+          HOURGLASS_4,
+          CLOCK,
+          CIRCLE,
+          SQUARE,
+          CHEVRON_LEFT,
+          CHEVRON_UP,
+          CHEVRON_DOWN,
+          CHEVRON_RIGHT,
+          CHECK,
+          CLOSE,
+        ]}
       />
       <StringInput
         onChange={l => props.onChange({...value, label: l})}
@@ -39,6 +69,7 @@ function QuickActionBind(props) {
       />
       <NumberInput
         onChange={m => props.onChange({...value, magnitude: m * 1000})}
+        value={value.magnitude / 1000}
         placeholder={'Time in seconds'}
       />
     </div>

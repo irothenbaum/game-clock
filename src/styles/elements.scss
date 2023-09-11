@@ -1,6 +1,7 @@
 @use './constants.scss';
 @use './layout.scss';
 @use './colors.scss';
+@use './typography.scss';
 
 @mixin hover-cta {
   cursor: pointer;
@@ -70,6 +71,7 @@
 }
 
 @mixin square-icon($width: 42px) {
+  display: inline-block;
   flex-shrink: 0;
   height: $width;
   width: $width;
@@ -80,6 +82,7 @@
 }
 
 @mixin input-box() {
+  line-height: 1.5em;
   width: 100%;
   border-radius: 6px;
   border: 1px solid colors.$lightGrey;

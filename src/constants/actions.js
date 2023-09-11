@@ -9,8 +9,8 @@ export const ACTION_DECREASE_HOME_SCORE = 'ACTION_DECREASE_HOME_SCORE'
 
 export const ACTION_INCREASE_VISITOR_SCORE = 'ACTION_INCREASE_VISITOR_SCORE'
 export const ACTION_DECREASE_VISITOR_SCORE = 'ACTION_DECREASE_VISITOR_SCORE'
-
 export const ACTION_SET_GAME_CLOCK = 'ACTION_SET_GAME_CLOCK'
+export const ACTION_SET_SHOT_CLOCK = 'ACTION_SET_SHOT_CLOCK'
 
 export const actionLabels = {
   [ACTION_START_GAME_CLOCK]: 'Start Game Clock',
@@ -22,6 +22,7 @@ export const actionLabels = {
   [ACTION_INCREASE_VISITOR_SCORE]: 'Increase Visitor Score',
   [ACTION_DECREASE_VISITOR_SCORE]: 'Decrease Visitor Score',
   [ACTION_SET_GAME_CLOCK]: 'Set Game Clock',
+  [ACTION_SET_SHOT_CLOCK]: 'Set Shot Clock',
 }
 
 export const singleClickActions = [
@@ -35,4 +36,7 @@ export const singleClickActions = [
   ACTION_INCREASE_HOME_SCORE,
 ]
 
-export const customizableActions = [ACTION_SET_GAME_CLOCK]
+export const customizableActions = [
+  ACTION_SET_GAME_CLOCK,
+  ACTION_SET_SHOT_CLOCK,
+]
