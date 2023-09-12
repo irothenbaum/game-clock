@@ -14,7 +14,7 @@ import {
 } from '../constants/actions'
 
 /**
- * @return {{execute: function(string, number?): void}}
+ * @return {{execute: function(string|QuickAction, number?): void}}
  */
 function useActions() {
   const {

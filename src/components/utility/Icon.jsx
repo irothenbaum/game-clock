@@ -22,9 +22,8 @@ import {
   faHourglassEnd,
   faHourglassHalf,
   faClock,
-  faSquare,
 } from '@fortawesome/free-solid-svg-icons'
-import {faCircle} from '@fortawesome/free-regular-svg-icons'
+import {faCircle, faSquare} from '@fortawesome/free-regular-svg-icons'
 import {constructClassString} from '../../utilities'
 
 export const CHEVRON_LEFT = faChevronLeft

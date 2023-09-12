@@ -7,12 +7,10 @@ import GameContext from '../../GameContext'
 import Scores from './scoreboard/Scores'
 import SettingsContext from '../../SettingsContext'
 import KeystrokeHandler from './scoreboard/KeystrokeHandler'
-import useDoOnceTimer from '../../hooks/useDoOnceTimer'
 import QuickActions from './scoreboard/QuickActions'
 
 const Scoreboard = forwardRef(function Scoreboard(props, ref) {
   const {shotClockMS, periodLengthMS} = useContext(SettingsContext)
-  const {setTimer} = useDoOnceTimer()
 
   const {
     isRunning: isGameClockRunning,
@@ -113,10 +111,7 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
           onChange={setShotClock}
           onStart={startShotClock}
           onStop={stopShotClock}
-          onReset={() => {
-            stopShotClock()
-            setShotClock(shotClockMS)
-          }}
+          onReset={() => setShotClock(shotClockMS)}
         />
       </div>
     </GameContext.Provider>

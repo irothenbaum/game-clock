@@ -25,6 +25,7 @@ import {actionLabels, customizableActions} from '../../../constants/actions'
 
 /**
  * @typedef QuickAction
+ * @property {string} id
  * @property {string} action
  * @property {*} icon
  * @property {string} label

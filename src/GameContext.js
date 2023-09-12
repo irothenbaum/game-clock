@@ -19,8 +19,6 @@ export const HydratedGame = storedValue
  * @param {*} obj
  */
 export const flushGame = obj => {
-  console.log('FLIUSHING GAME', obj)
-
   localStorage[GAME_CACHE_KEY] = JSON.stringify(obj)
 }
 

@@ -9,7 +9,9 @@ function QuickActions(props) {
   const {quickActions} = useContext(SettingsContext)
   const {execute} = useActions()
 
-  const filteredActions = quickActions.filter(filterCompletedQuickActions)
+  const filteredActions = Object.values(quickActions).filter(
+    filterCompletedQuickActions,
+  )
 
   return (
     <div className="quick-actions">

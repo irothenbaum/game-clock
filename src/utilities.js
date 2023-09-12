@@ -56,22 +56,14 @@ export function filterCompletedQuickActions(a) {
   )
 }
 
-const QUICK_ACTION_PREFIX = 'QuickAction-'
-
 /**
- * @param {number} index
- * @return {string}
+ * @param {Object<string, string>} keyBindings
+ * @param {string} action
+ * @return {string|null}
  */
-export function quickActionToKeyBindingProp(index) {
-  return `${QUICK_ACTION_PREFIX}${index}`
-}
-
-/**
- * @param {string} key
- * @return {number}
- */
-export function keyBindingPropToQuickActionIndex(key) {
-  return key.startsWith(QUICK_ACTION_PREFIX)
-    ? parseInt(key.substring(QUICK_ACTION_PREFIX.length))
-    : -1
+export function getKeyBindForAction(keyBindings, action) {
+  const matching = Object.entries(keyBindings).find(
+    ([key, value]) => value === action,
+  )
+  return matching ? matching[0] : null
 }

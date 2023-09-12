@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react'
 import SettingsContext from '../../../SettingsContext'
 import useActions from '../../../hooks/useActions'
-import {keyBindingPropToQuickActionIndex} from '../../../utilities'
+import {singleClickActions} from '../../../constants/actions'
 
 function KeystrokeHandler(props) {
   const {keyBindings, quickActions, isSettingsPanelOpen, updateSettings} =
@@ -14,23 +14,21 @@ function KeystrokeHandler(props) {
         return
       }
 
-      const key = e.key
-      const matching = Object.entries(keyBindings).find(([action, value]) => {
-        return value === key
-      })
+      const macro = keyBindings[e.key]
 
-      if (matching) {
-        const quickActionIndex = keyBindingPropToQuickActionIndex(matching[0])
-        if (quickActionIndex !== -1) {
-          const action = quickActions[quickActionIndex]
-          if (action) {
-            execute(action.action, action.magnitude)
-          } else {
-            // action was not found - this can happen if a key binding was created but the quick action was deleted
-            // NOTE: we attempt to handle this during hydration of SettingsContext so let's not overthink it here
-          }
+      // if this key is bound to a macro
+      if (macro) {
+        if (singleClickActions.includes(macro)) {
+          // if the marco is a single click action, execute it immediately
+          execute(macro)
+        } else if (quickActions[macro]) {
+          // if the macros is pointing to a quick action, execute the quick action
+          execute(quickActions[macro].action, quickActions[macro].magnitude)
         } else {
-          execute(matching[0])
+          // action was not found - this can happen if a key binding was created but the quick action was deleted
+          // NOTE: we attempt to prevent this when the user deletes a quick action that has a keybinding, but just in case
+          // we're going to remove the keybinding here
+          updateSettings({keyBindings: {...keyBindings, [e.key]: null}})
         }
       }
     }
