@@ -47,62 +47,10 @@
     margin-bottom: all.$spaceMedium;
   }
 
-  #reset-all-settings {
-    margin-top: 50vh;
-    background-color: all.$lightGrey;
-    color: all.$white;
-    border: none;
-    display: block;
-    text-align: center;
-    width: 100%;
-    padding: all.$spaceLarge;
-    font-size: all.$fontSize4;
-    cursor: pointer;
-    transition: all all.$transition;
-
-    &:hover {
-      background-color: all.$red;
-    }
-  }
-
   .section {
     margin-top: all.$spaceLarge;
     padding: all.$spaceLarge;
     border-top: 1px solid all.$lightGrey;
-
-    hr {
-      margin: all.$spaceLarge 0;
-    }
-  }
-
-  .row {
-    margin-bottom: all.$spaceLarge;
-
-    label {
-      display: block;
-      margin-bottom: all.$spaceSmall;
-      font-size: all.$fontSize4;
-    }
-  }
-
-  .quick-action-entry {
-    margin-top: all.$spaceSmall;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .remove-quick-action-button {
-      margin-left: all.$spaceSmall;
-      font-size: all.$fontSize4;
-    }
-  }
-
-  .text-cta {
-    margin-top: all.$spaceMedium;
-  }
-
-  .key-bind {
-    margin-top: all.$spaceSmall;
   }
 }
 

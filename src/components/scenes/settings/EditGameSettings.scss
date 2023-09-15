@@ -1,0 +1,17 @@
+@use "../../../styles/all";
+
+.edit-game-settings {
+  .row {
+    margin-bottom: all.$spaceLarge;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: all.$spaceSmall;
+      font-size: all.$fontSize4;
+    }
+  }
+}

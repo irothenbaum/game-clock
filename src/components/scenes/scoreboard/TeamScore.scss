@@ -9,17 +9,9 @@
     }
   }
 
-  h3 {
-
-  }
-
-  p {
-    font-size: all.$fontSize1;
-  }
-
   .team-score-controls {
     @include all.overlay-fill();
-    font-size: 2rem;
+    font-size: 2em;
     border: 1px solid all.$lightGrey;
     border-radius: 6px;
     overflow: hidden;

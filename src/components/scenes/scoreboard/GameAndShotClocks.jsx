@@ -33,6 +33,7 @@ function GameAndShotClocks(props) {
   return (
     <React.Fragment>
       <Clock
+        label={'Time remaining'}
         isRunning={isGameClockRunning}
         className="game-clock"
         timeMS={gameClockRemaining}
@@ -55,6 +56,7 @@ function GameAndShotClocks(props) {
         }}
       />
       <Clock
+        label={'Shot clock'}
         isRunning={isShotClockRunning}
         className="shot-clock"
         // if game time < shot clock, shot clock mirrors game time

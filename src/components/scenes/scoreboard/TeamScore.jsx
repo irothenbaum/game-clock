@@ -7,8 +7,8 @@ import ToolTip, {ANCHOR_TOP, ANCHOR_BOTTOM} from '../../utility/ToolTip'
 function TeamScore(props) {
   return (
     <div className="team-score">
-      <h3>{props.label}</h3>
-      <p>{props.score}</p>
+      <h3 className="score-label">{props.label}</h3>
+      <p className="score-value">{props.score}</p>
 
       {typeof props.onChange === 'function' ? (
         <div className="team-score-controls">

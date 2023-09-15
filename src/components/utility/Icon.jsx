@@ -22,6 +22,8 @@ import {
   faHourglassEnd,
   faHourglassHalf,
   faClock,
+  faVolleyball,
+  faBasketball,
 } from '@fortawesome/free-solid-svg-icons'
 import {faCircle, faSquare} from '@fortawesome/free-regular-svg-icons'
 import {constructClassString} from '../../utilities'
@@ -47,6 +49,8 @@ export const HOURGLASS_4 = faHourglassEnd
 export const CLOCK = faClock
 export const CIRCLE = faCircle
 export const SQUARE = faSquare
+export const BASKETBALL = faBasketball
+export const WATER_POLO = faVolleyball
 
 function Icon(props) {
   return (

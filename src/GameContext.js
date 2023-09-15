@@ -2,6 +2,7 @@ import {createContext} from 'react'
 const GAME_CACHE_KEY = 'game-clock-game'
 
 export const DefaultGame = {
+  period: 1,
   homeScore: 0,
   visitorScore: 0,
   shotClockRemaining: 0,

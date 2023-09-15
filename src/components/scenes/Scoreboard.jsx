@@ -5,6 +5,7 @@ import GameAndShotClocks from './scoreboard/GameAndShotClocks'
 import {constructClassString} from '../../utilities'
 import GameContext from '../../GameContext'
 import useSoundPlayer, {SOUND_BUZZER} from '../../hooks/useSoundPlayer'
+import Period from './scoreboard/Period'
 
 const Scoreboard = forwardRef(function Scoreboard(props, ref) {
   const {isShotClockExpired, isGameClockExpired} = useContext(GameContext)
@@ -19,12 +20,6 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
   //   })
   // }, [gameClockRemaining, homeScore, visitorScore, shotClockRemaining])
 
-  // useEffect(() => {
-  //   if (isShotClockExpired) {
-  //     playSound(SOUND_BUZZER)
-  //   }
-  // }, [isShotClockExpired])
-
   useEffect(() => {
     if (isGameClockExpired) {
       playSound(SOUND_BUZZER)
@@ -38,6 +33,7 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
         ['game-clock-expired']: isGameClockExpired,
       })}
       ref={ref}>
+      <Period />
       <Scores />
       <GameAndShotClocks />
     </div>

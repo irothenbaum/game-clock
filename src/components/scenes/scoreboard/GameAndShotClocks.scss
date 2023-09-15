@@ -1,11 +1,11 @@
 @use "../../../styles/all";
 
-.game-clock {
+.game-clock .clock-value {
   font-size: all.$fontSize1;
   min-width: 400px;
 }
 
-.shot-clock {
+.shot-clock .clock-value {
   font-size: all.$fontSize2;
   min-width: 300px;
 }

@@ -1,0 +1,19 @@
+@use "../../../styles/all";
+
+.edit-quick-actions {
+  .quick-action-entry {
+    margin-top: all.$spaceSmall;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .remove-quick-action-button {
+      margin-left: all.$spaceSmall;
+      font-size: all.$fontSize4;
+    }
+  }
+
+  .text-cta {
+    margin-top: all.$spaceMedium;
+  }
+}

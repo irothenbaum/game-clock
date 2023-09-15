@@ -117,24 +117,27 @@ function Clock(props) {
         stop: animateMode === ANIMATE_STOP,
         reset: animateMode === ANIMATE_RESET,
       })}>
-      {!props.hideMinutes && (
-        <span
-          className={constructClassString({
-            disabled: minutes === 0,
-          })}>
-          <span className="minutes">
-            {minutes > 0 ? minutes : zeroPad(minutes)}
+      <h3 className="clock-label">{props.label}</h3>
+      <div className="clock-value">
+        {!props.hideMinutes && (
+          <span
+            className={constructClassString({
+              disabled: minutes === 0,
+            })}>
+            <span className="minutes">
+              {minutes > 0 ? minutes : zeroPad(minutes)}
+            </span>
+            <span className="colon">:</span>
           </span>
-          <span className="colon">:</span>
-        </span>
-      )}
-      <span className="seconds">{zeroPad(seconds)}</span>
-      {showMilliseconds && (
-        <React.Fragment>
-          <span className="period">.</span>
-          <span className="milliseconds">{zeroPad(milliseconds)}</span>
-        </React.Fragment>
-      )}
+        )}
+        <span className="seconds">{zeroPad(seconds)}</span>
+        {showMilliseconds && (
+          <React.Fragment>
+            <span className="period">.</span>
+            <span className="milliseconds">{zeroPad(milliseconds)}</span>
+          </React.Fragment>
+        )}
+      </div>
 
       <div className="clock-controls">
         <span>
@@ -178,6 +181,7 @@ function Clock(props) {
 }
 
 Clock.propTypes = {
+  label: PropTypes.string,
   timeMS: PropTypes.number.isRequired,
   hideMinutes: PropTypes.bool,
   className: PropTypes.string,

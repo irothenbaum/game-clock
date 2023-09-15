@@ -1,0 +1,11 @@
+@use "../../../styles/all";
+
+.edit-key-bindings {
+  .key-bind {
+    margin-top: all.$spaceSmall;
+  }
+
+  hr {
+    margin: all.$spaceLarge 0;
+  }
+}

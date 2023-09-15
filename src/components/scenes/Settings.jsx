@@ -1,70 +1,16 @@
 import React, {forwardRef, useContext} from 'react'
 import './Settings.scss'
 import PropTypes from 'prop-types'
-import {
-  constructClassString,
-  filterCompletedQuickActions,
-  getKeyBindForAction,
-} from '../../utilities'
-import TimeInput from '../utility/TimeInput'
-import SettingsContext, {
-  flushSettings,
-  DefaultSettings,
-} from '../../SettingsContext'
-import {DefaultGame, flushGame} from '../../GameContext'
-import Icon, {PLUS, CLOSE, STOPWATCH} from '../utility/Icon'
-import {singleClickActions} from '../../constants/actions'
-import QuickActionBind from './settings/QuickActionBind'
-import TextCTA from '../utility/TextCTA'
-import {v4 as uuid} from 'uuid'
-import ActionKeyBind from './settings/ActionKeyBind'
+import {constructClassString} from '../../utilities'
+import Icon, {CLOSE} from '../utility/Icon'
+import PresetSelector from './settings/PresetSelector'
+import EditQuickActions from './settings/EditQuickActions'
+import SettingsContext from '../../SettingsContext'
+import EditKeyBindings from './settings/EditKeyBindings'
+import EditGameSettings from './settings/EditGameSettings'
 
 const Settings = forwardRef(function Settings(props, ref) {
-  const {
-    periodLengthMS,
-    shotClockMS,
-    isSettingsPanelOpen,
-    keyBindings,
-    updateSettings,
-    quickActions,
-  } = useContext(SettingsContext)
-
-  const filteredActions = Object.values(quickActions).filter(
-    filterCompletedQuickActions,
-  )
-
-  /**
-   * @param {QuickAction} a
-   */
-  const handleChangeQuickAction = a => {
-    updateSettings({
-      quickActions: {...quickActions, [a.id]: a},
-    })
-  }
-
-  /**
-   * @param {string} id
-   */
-  const removeQuickAction = id => {
-    if (getKeyBindForAction(keyBindings, id)) {
-      window.alert('You must unbind this action before removing it.')
-      return
-    }
-
-    const clone = {...quickActions}
-    delete clone[id]
-
-    updateSettings({
-      quickActions: clone,
-    })
-  }
-
-  const resetToDefault = () => {
-    flushGame(DefaultGame)
-    flushSettings(DefaultSettings)
-    window.location.reload()
-  }
-
+  const {isSettingsPanelOpen, updateSettings} = useContext(SettingsContext)
   return (
     <div
       ref={ref}
@@ -80,63 +26,23 @@ const Settings = forwardRef(function Settings(props, ref) {
 
       <div className="section">
         <h3>Game</h3>
-        <div className="row">
-          <label>Period Length</label>
-          <TimeInput
-            value={periodLengthMS}
-            onChange={v => updateSettings({periodLengthMS: v})}
-            onCancel={v => updateSettings({periodLengthMS: periodLengthMS})}
-          />
-        </div>
-
-        <div className="row">
-          <label>Shot Clock</label>
-          <TimeInput
-            value={shotClockMS}
-            onChange={v => updateSettings({shotClockMS: v})}
-            onCancel={v => updateSettings({shotClockMS: shotClockMS})}
-          />
-        </div>
+        <EditGameSettings />
       </div>
 
       <div className="section">
-        <h3>Quick Links</h3>
-        {Object.values(quickActions).map(qA => (
-          <div className="quick-action-entry" key={qA.id}>
-            <QuickActionBind value={qA} onChange={handleChangeQuickAction} />
-            <Icon
-              className="remove-quick-action-button"
-              icon={CLOSE}
-              onClick={() => removeQuickAction(qA.id)}
-            />
-          </div>
-        ))}
-        <TextCTA
-          icon={PLUS}
-          onClick={() => handleChangeQuickAction({id: uuid()})}
-          label={'Create new quick action'}
-        />
+        <h3>Custom Actions</h3>
+        <EditQuickActions />
       </div>
 
       <div className="section">
         <h3>Key Bindings</h3>
-        {singleClickActions.map(action => (
-          <ActionKeyBind key={action} actionId={action} />
-        ))}
-        {filteredActions.length > 0 && (
-          <React.Fragment>
-            <hr />
-            <h4>Key Bind Quick Links</h4>
-            {filteredActions.map(quickAction => (
-              <ActionKeyBind key={quickAction.id} actionId={quickAction.id} />
-            ))}
-          </React.Fragment>
-        )}
+        <EditKeyBindings />
       </div>
 
-      <button id="reset-all-settings" onClick={resetToDefault}>
-        Reset to Default
-      </button>
+      <div className="section">
+        <h3>Presets</h3>
+        <PresetSelector />
+      </div>
     </div>
   )
 })

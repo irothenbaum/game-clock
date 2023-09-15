@@ -55,6 +55,12 @@ function GameClock(props) {
     change: changeVisitorScore,
   } = useIncrement(0)
 
+  const {
+    value: period,
+    setValue: setPeriod,
+    change: changePeriod,
+  } = useIncrement(0)
+
   return (
     <div id="game-clock">
       <SettingsContext.Provider
@@ -84,6 +90,10 @@ function GameClock(props) {
             visitorScore,
             setVisitorScore,
             changeVisitorScore,
+
+            period,
+            setPeriod,
+            changePeriod,
           }}>
           <Scoreboard ref={scoreBoardRef} />
           <Icon

@@ -2,8 +2,8 @@ import {createContext} from 'react'
 const SETTINGS_CACHE_KEY = 'game-clock-settings'
 
 export const DefaultSettings = {
-  periodLengthMS: 420000, // 7 minutes
-  shotClockMS: 30000, // 30 seconds
+  periodLengthMS: 0,
+  shotClockMS: 0,
   keyBindings: {},
   quickActions: {},
   isSettingsPanelOpen: false, // this one doesn't really fit, but it's a good place to put it
