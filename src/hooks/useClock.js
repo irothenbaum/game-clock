@@ -34,11 +34,19 @@ function useClock(startingValue, updateInterval = 50) {
   }, [isRunning])
 
   const startClock = () => {
+    if (isRunning) {
+      return
+    }
+
     endTimeRef.current = Date.now() + timeRemaining
     setIsRunning(true)
   }
 
   const stopClock = () => {
+    if (!isRunning) {
+      return
+    }
+
     refreshTimeRemaining()
     setIsRunning(false)
     endTimeRef.current = null

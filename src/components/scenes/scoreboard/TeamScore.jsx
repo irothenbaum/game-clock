@@ -2,6 +2,7 @@ import React from 'react'
 import './TeamScore.scss'
 import PropTypes from 'prop-types'
 import Icon, {CHEVRON_DOWN, CHEVRON_UP} from '../../utility/Icon'
+import ToolTip, {ANCHOR_TOP, ANCHOR_BOTTOM} from '../../utility/ToolTip'
 
 function TeamScore(props) {
   return (
@@ -11,9 +12,17 @@ function TeamScore(props) {
 
       {typeof props.onChange === 'function' ? (
         <div className="team-score-controls">
-          <Icon icon={CHEVRON_UP} onClick={() => props.onChange(1)} />
+          <Icon
+            className="score-change-button"
+            icon={CHEVRON_UP}
+            onClick={() => props.onChange(1)}
+          />
           <div className="divider" />
-          <Icon icon={CHEVRON_DOWN} onClick={() => props.onChange(-1)} />
+          <Icon
+            className="score-change-button"
+            icon={CHEVRON_DOWN}
+            onClick={() => props.onChange(-1)}
+          />
         </div>
       ) : null}
     </div>

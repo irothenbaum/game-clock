@@ -11,12 +11,15 @@ import {
   ACTION_STOP_GAME_CLOCK,
   ACTION_SET_GAME_CLOCK,
   ACTION_SET_SHOT_CLOCK,
+  ACTION_RESET_SHOT_CLOCK,
 } from '../constants/actions'
+import SettingsContext from '../SettingsContext'
 
 /**
  * @return {{execute: function(string|QuickAction, number?): void}}
  */
 function useActions() {
+  const {shotClockMS} = useContext(SettingsContext)
   const {
     stopGameClock,
     startGameClock,
@@ -40,6 +43,10 @@ function useActions() {
 
       case ACTION_STOP_SHOT_CLOCK:
         stopShotClock()
+        break
+
+      case ACTION_RESET_SHOT_CLOCK:
+        setShotClock(shotClockMS)
         break
 
       case ACTION_START_GAME_CLOCK:

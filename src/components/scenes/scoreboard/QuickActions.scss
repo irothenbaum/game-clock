@@ -1,5 +1,7 @@
 @use '../../../styles/all';
 
+$size: 60px;
+
 .quick-actions {
   position: fixed;
   bottom: all.$spaceMedium;
@@ -9,17 +11,24 @@
   align-items: center;
   justify-content: flex-start;
 
+  .quick-action {
+    margin-right: all.$spaceMedium;
+    position: relative;
+    @include all.hover-cta();
+
+    &:hover {
+      .icon-container {
+        @include all.shadow(10px)
+      }
+    }
+  }
+
   .icon-container {
-    @include all.square-icon(60px);
+    @include all.square-icon($size);
     border-radius: 50%;
     background-color: all.$white;
     font-size: 2rem;
-    margin-right: all.$spaceMedium;
     @include all.shadow(0px);
     transition: all all.$transition;
-
-    &:hover {
-      @include all.shadow(10px)
-    }
   }
 }

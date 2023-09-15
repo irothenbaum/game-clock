@@ -3,14 +3,16 @@ import './Scoreboard.scss'
 import useIncrement from '../../hooks/useIncrement'
 import Clock from './scoreboard/Clock'
 import useClock from '../../hooks/useClock'
-import GameContext from '../../GameContext'
+import GameContext, {flushGame} from '../../GameContext'
 import Scores from './scoreboard/Scores'
 import SettingsContext from '../../SettingsContext'
 import KeystrokeHandler from './scoreboard/KeystrokeHandler'
 import QuickActions from './scoreboard/QuickActions'
+import useDoOnceTimer from '../../hooks/useDoOnceTimer'
 
 const Scoreboard = forwardRef(function Scoreboard(props, ref) {
   const {shotClockMS, periodLengthMS} = useContext(SettingsContext)
+  const {setTimer} = useDoOnceTimer()
 
   const {
     isRunning: isGameClockRunning,
@@ -40,22 +42,15 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
     change: changeVisitorScore,
   } = useIncrement(0)
 
-  // TODO: Trying to implement some local caching in case screen gets refreshed
+  // // TODO: Trying to implement some local caching in case screen gets refreshed
   // useEffect(() => {
-  //   const flushTimer = () => {
-  //     flushGame({
-  //       homeScore,
-  //       visitorScore,
-  //       shotClockRemaining,
-  //       gameClockRemaining,
-  //     })
-  //
-  //     // every 10 seconds
-  //     setTimer('save-game-timer', flushTimer, 10000)
-  //   }
-  //
-  //   flushTimer()
-  // }, [])
+  //   flushGame({
+  //     homeScore,
+  //     visitorScore,
+  //     shotClockRemaining,
+  //     gameClockRemaining,
+  //   })
+  // }, [gameClockRemaining, homeScore, visitorScore, shotClockRemaining])
 
   return (
     <GameContext.Provider
@@ -98,9 +93,11 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
             stopShotClock()
           }}
           onReset={() => {
-            // when we reset the game clock, we also stop it
+            // when we reset the game clock, we also stop it and reset and stop the shot clock
             stopGameClock()
+            stopShotClock()
             setGameClock(periodLengthMS)
+            setShotClock(shotClockMS)
           }}
         />
         <Clock

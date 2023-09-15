@@ -4,6 +4,7 @@ import SettingsContext from '../../../SettingsContext'
 import Icon from '../../utility/Icon'
 import useActions from '../../../hooks/useActions'
 import {filterCompletedQuickActions} from '../../../utilities'
+import ToolTip, {ANCHOR_TOP} from '../../utility/ToolTip'
 
 function QuickActions(props) {
   const {quickActions} = useContext(SettingsContext)
@@ -16,12 +17,14 @@ function QuickActions(props) {
   return (
     <div className="quick-actions">
       {filteredActions.map((qA, index) => (
-        <div title={qA.label} key={index} className="quick-action">
-          <Icon
-            icon={qA.icon}
-            onClick={() => execute(qA.action, qA.magnitude)}
-          />
-        </div>
+        <ToolTip
+          anchor={ANCHOR_TOP}
+          key={index}
+          label={qA.label}
+          className="quick-action"
+          onClick={() => execute(qA.action, qA.magnitude)}>
+          <Icon icon={qA.icon} />
+        </ToolTip>
       ))}
     </div>
   )

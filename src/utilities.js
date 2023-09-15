@@ -27,8 +27,8 @@ export function constructClassString(...classes) {
  */
 export function timeMSToParts(timeMS = 0) {
   const minutes = Math.floor(timeMS / 60000)
-  const seconds = Math.floor((timeMS % 60000) / 1000)
-  const milliseconds = Math.floor((timeMS % 1000) / 10)
+  const seconds = Math.ceil((timeMS % 60000) / 1000)
+  const milliseconds = Math.ceil((timeMS % 1000) / 10)
 
   return [minutes, seconds, milliseconds]
 }
@@ -66,4 +66,12 @@ export function getKeyBindForAction(keyBindings, action) {
     ([key, value]) => value === action,
   )
   return matching ? matching[0] : null
+}
+
+/**
+ * @param {string} string
+ * @return {string}
+ */
+export function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
 }
