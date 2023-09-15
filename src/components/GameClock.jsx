@@ -30,6 +30,7 @@ function GameClock(props) {
     stopClock: stopGameClock,
     startClock: startGameClock,
     timeRemaining: gameClockRemaining,
+    isTimeExpired: isGameClockExpired,
     setClock: setGameClock,
   } = useClock(settings.periodLengthMS)
 
@@ -38,6 +39,7 @@ function GameClock(props) {
     stopClock: stopShotClock,
     startClock: startShotClock,
     timeRemaining: shotClockRemaining,
+    isTimeExpired: isShotClockExpired,
     setClock: setShotClock,
   } = useClock(settings.shotClockMS)
 
@@ -66,12 +68,14 @@ function GameClock(props) {
             stopGameClock,
             startGameClock,
             gameClockRemaining,
+            isGameClockExpired,
             setGameClock,
 
             isShotClockRunning,
             stopShotClock,
             startShotClock,
             shotClockRemaining,
+            isShotClockExpired,
             setShotClock,
 
             homeScore,

@@ -1,4 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
+import useDoOnceTimer from './useDoOnceTimer'
+
+const TIMER_TIME_EXPIRED = 'time-expired'
 
 /**
  * @param {number} startingValue
@@ -9,12 +12,14 @@ function useClock(startingValue, updateInterval = 50) {
   const endTimeRef = useRef(null)
   const [isRunning, setIsRunning] = useState(false)
   const [timeRemaining, setTimeRemaining] = useState(startingValue)
+  const {setTimer, cancelTimer} = useDoOnceTimer()
 
   const refreshTimeRemaining = () => {
     const newTimeRemaining = Math.max(
       0,
       (endTimeRef.current || Date.now()) - Date.now(),
     )
+
     setTimeRemaining(newTimeRemaining)
   }
 
@@ -23,9 +28,9 @@ function useClock(startingValue, updateInterval = 50) {
       return
     }
 
+    setIsRunning(true)
     endTimeRef.current = Date.now() + timeRemaining
     refreshTimeRemaining()
-    setIsRunning(true)
   }
 
   const stopClock = () => {
@@ -33,8 +38,8 @@ function useClock(startingValue, updateInterval = 50) {
       return
     }
 
-    refreshTimeRemaining()
     setIsRunning(false)
+    refreshTimeRemaining()
     endTimeRef.current = null
   }
 
@@ -53,11 +58,20 @@ function useClock(startingValue, updateInterval = 50) {
     refreshTimeRemaining()
   }
 
+  useEffect(() => {
+    if (isRunning) {
+      setTimer(TIMER_TIME_EXPIRED, () => setTimeRemaining(0), timeRemaining)
+    } else {
+      cancelTimer(TIMER_TIME_EXPIRED)
+    }
+  }, [isRunning, timeRemaining])
+
   return {
     // while the clock is running, the timeRemaining is not updated for performance reasons
     // when the clock is stopped, started, or reset, then the timeRemaining is updated
     // components that care about realtime timeRemaining will need to calculate it on their own using use effects
     isRunning,
+    isTimeExpired: timeRemaining === 0,
     timeRemaining,
     startClock,
     stopClock,

@@ -7,6 +7,7 @@ export const DefaultSettings = {
   keyBindings: {},
   quickActions: {},
   isSettingsPanelOpen: false, // this one doesn't really fit, but it's a good place to put it
+  areSoundsMuted: false,
 }
 
 // hydrate from our stored value

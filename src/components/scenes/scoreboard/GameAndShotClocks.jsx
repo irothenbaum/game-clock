@@ -1,6 +1,6 @@
 import Clock from './Clock'
 import './GameAndShotClocks.scss'
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import SettingsContext from '../../../SettingsContext'
 import GameContext from '../../../GameContext'
 
@@ -10,16 +10,25 @@ function GameAndShotClocks(props) {
   const {
     isGameClockRunning,
     gameClockRemaining,
+    isGameClockExpired,
     setGameClock,
     startGameClock,
     stopGameClock,
 
     isShotClockRunning,
     shotClockRemaining,
+    isShotClockExpired,
     startShotClock,
     stopShotClock,
     setShotClock,
   } = useContext(GameContext)
+
+  useEffect(() => {
+    // once the game clock expires, the shot clock drops to 0
+    if (isGameClockExpired) {
+      setShotClock(shotClockMS)
+    }
+  }, [isGameClockExpired])
 
   return (
     <React.Fragment>
@@ -48,7 +57,8 @@ function GameAndShotClocks(props) {
       <Clock
         isRunning={isShotClockRunning}
         className="shot-clock"
-        timeMS={shotClockRemaining}
+        // if game time < shot clock, shot clock mirrors game time
+        timeMS={Math.min(shotClockRemaining, gameClockRemaining)}
         hideMinutes={true}
         onChange={setShotClock}
         onStart={startShotClock}

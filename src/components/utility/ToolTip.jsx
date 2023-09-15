@@ -49,7 +49,7 @@ function ToolTip(props) {
   return (
     <div
       className={constructClassString('tooltip', anchorClass, props.className)}
-      title={props.label}
+      title={props.withTitle ? props.label : undefined}
       onClick={props.onClick}>
       {props.children}
       <div
@@ -80,6 +80,7 @@ ToolTip.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func,
   anchor: PropTypes.string,
+  withTitle: PropTypes.bool,
 }
 
 export default ToolTip
