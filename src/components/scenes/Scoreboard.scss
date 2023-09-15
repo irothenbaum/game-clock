@@ -10,14 +10,4 @@
   align-items: center;
   justify-content: space-evenly;
   background-color: all.$offWhite;
-
-  .game-clock {
-    font-size: all.$fontSize1;
-    min-width: 400px;
-  }
-
-  .shot-clock {
-    font-size: all.$fontSize2;
-    min-width: 300px;
-  }
 }

@@ -17,17 +17,35 @@ function zeroPad(num) {
 const ANIMATE_NONE = 0
 const ANIMATE_START = 1
 const ANIMATE_STOP = 2
+const ANIMATE_RESET = 3
+
+const TIMER_ANIMATION = 'animation'
+const TIMER_INITIALIZATION = 'initialization'
+const TIMER_CLOCK = 'clock'
 
 function Clock(props) {
-  const [minutes, seconds, milliseconds] = timeMSToParts(props.timeMS)
+  // cached time is used when they're editing the value so it doesn't keep changing
   const [cachedTime, setCachedTime] = useState(null)
-  const hasInitialized = useRef(false)
-  // show MS if we're under 10 seconds left
-  const showMilliseconds = props.timeMS < 10000
-  const [animateMode, setAnimateMode] = useState(ANIMATE_NONE)
 
-  const {setTimer} = useDoOnceTimer()
+  // hasInitialized is used to prevent the animation from running on first render
+  const hasInitialized = useRef(false)
+
+  // show MS if we're under 10 seconds left
+  const showMilliseconds = props.timeMS < 60000
+  const [animateMode, setAnimateMode] = useState(ANIMATE_NONE)
+  const {setTimer, cancelTimer} = useDoOnceTimer()
   const [isEditing, setIsEditing] = useState(false)
+
+  // this is a cached copy of timeMS which we use to animate the time remaining
+  const [timeRemaining, setTimeRemaining] = useState(props.timeMS)
+  const [minutes, seconds, milliseconds] = timeMSToParts(timeRemaining)
+  const endTimeRef = useRef()
+
+  const refreshTimeRemaining = () => {
+    setTimeRemaining(
+      Math.max(0, (endTimeRef.current || Date.now()) - Date.now()),
+    )
+  }
 
   useEffect(() => {
     if (isEditing) {
@@ -38,8 +56,38 @@ function Clock(props) {
   }, [isEditing])
 
   useEffect(() => {
+    setTimer(
+      TIMER_INITIALIZATION,
+      () => {
+        hasInitialized.current = true
+      },
+      500,
+    )
+
+    refreshTimeRemaining()
+  }, [])
+
+  useEffect(() => {
+    // initialize our end time and refresh our cache copy of the time remaining
+    endTimeRef.current = Date.now() + props.timeMS
+
+    if (props.isRunning) {
+      const tick = () => {
+        refreshTimeRemaining()
+        setTimer(TIMER_CLOCK, tick, 100) // update our clock 10x per second
+      }
+
+      tick()
+    } else {
+      refreshTimeRemaining()
+      cancelTimer(TIMER_CLOCK, null)
+    }
+  }, [props.isRunning, props.timeMS])
+
+  // -------------------------------------------------------------------------------------------------------------
+  // There are animation effect functions and should not be used for logic because they will not run immediately
+  useEffect(() => {
     if (!hasInitialized.current) {
-      hasInitialized.current = true
       return
     }
 
@@ -49,14 +97,25 @@ function Clock(props) {
       setAnimateMode(ANIMATE_STOP)
     }
 
-    setTimer('animation', () => setAnimateMode(ANIMATE_NONE), 500)
+    setTimer(TIMER_ANIMATION, () => setAnimateMode(ANIMATE_NONE), 500)
   }, [props.isRunning])
+
+  useEffect(() => {
+    if (!hasInitialized.current) {
+      return
+    }
+
+    setAnimateMode(ANIMATE_RESET)
+    setTimer(TIMER_ANIMATION, () => setAnimateMode(ANIMATE_NONE), 500)
+  }, [props.timeMS])
+  // -------------------------------------------------------------------------------------------------------------
 
   return (
     <div
       className={constructClassString('clock', props.className, {
         start: animateMode === ANIMATE_START,
         stop: animateMode === ANIMATE_STOP,
+        reset: animateMode === ANIMATE_RESET,
       })}>
       {!props.hideMinutes && (
         <span
@@ -104,7 +163,15 @@ function Clock(props) {
       </div>
 
       <div className="animate-effect">
-        <Icon icon={animateMode === ANIMATE_START ? PLAY : STOP} />
+        <Icon
+          icon={
+            animateMode === ANIMATE_START
+              ? PLAY
+              : animateMode === ANIMATE_STOP
+              ? STOP
+              : RESET
+          }
+        />
       </div>
     </div>
   )

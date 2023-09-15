@@ -23,17 +23,9 @@
     }
   }
 
-  &.stop {
-    .animate-effect {
-      color: all.$red;
-    }
-  }
-
-  &.start {
-    .animate-effect {
-      color: all.$green;
-    }
-  }
+  &.stop { .animate-effect { color: all.$red; } }
+  &.start { .animate-effect { color: all.$green; } }
+  &.reset { .animate-effect { color: all.$copyColor; } }
 
   .disabled {
     opacity: 0.3;
