@@ -18,6 +18,13 @@ import Icon, {
   STOP,
   RESET,
   EDIT,
+  MEDAL,
+  HOCKEY,
+  BASEBALL,
+  FOOTBALL,
+  BOWLING,
+  SOCCER,
+  STOPWATCH_20,
 } from './Icon'
 import './IconSelector.scss'
 import SelectInput from './SelectInput'
@@ -30,6 +37,7 @@ const DEFAULT_ICONS = [
   RESET,
   EDIT,
   STOPWATCH,
+  STOPWATCH_20,
   PLUS,
   HOURGLASS_1,
   HOURGLASS_2,
@@ -40,6 +48,12 @@ const DEFAULT_ICONS = [
   SQUARE,
   BASKETBALL,
   WATER_POLO,
+  MEDAL,
+  HOCKEY,
+  BASEBALL,
+  FOOTBALL,
+  BOWLING,
+  SOCCER,
 ]
 
 function IconSelector(props) {

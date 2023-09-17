@@ -33,7 +33,7 @@ function GameAndShotClocks(props) {
   return (
     <React.Fragment>
       <Clock
-        label={'Time remaining'}
+        label={'Period time'}
         isRunning={isGameClockRunning}
         className="game-clock"
         timeMS={gameClockRemaining}

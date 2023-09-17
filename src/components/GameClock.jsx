@@ -11,13 +11,10 @@ import SessionContext, {
   flushSession,
 } from '../contexts/SessionContext'
 import GameContext, {HydratedGame} from '../contexts/GameContext'
-import Icon, {SETTINGS} from './utility/Icon'
-import {constructClassString} from '../utilities'
 import useClock from '../hooks/useClock'
 import useIncrement from '../hooks/useIncrement'
 import KeystrokeHandler from './scenes/scoreboard/KeystrokeHandler'
 import QuickActions from './scenes/scoreboard/QuickActions'
-import {PortalAnchor} from './utility/Portal'
 
 function GameClock(props) {
   const [settings, setSettings] = useState(HydratedSettings)
@@ -115,21 +112,9 @@ function GameClock(props) {
               changePeriod,
             }}>
             <Scoreboard ref={scoreBoardRef} />
-            <Icon
-              icon={SETTINGS}
-              className="settings-icon"
-              onClick={() => updateSession({isSettingsPanelOpen: true})}
-            />
-            <div
-              className={constructClassString('settings-overlay', {
-                open: session.isSettingsPanelOpen,
-              })}
-              onClick={() => updateSession({isSettingsPanelOpen: false})}
-            />
             <Settings />
             <KeystrokeHandler />
             <QuickActions />
-            <PortalAnchor />
           </GameContext.Provider>
         </SettingsContext.Provider>
       </SessionContext.Provider>

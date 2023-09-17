@@ -24,6 +24,13 @@ import {
   faClock,
   faVolleyball,
   faBasketball,
+  faMedal,
+  faHockeyPuck,
+  faBaseball,
+  faStopwatch20,
+  faFutbol,
+  faBowlingBall,
+  faFootball,
 } from '@fortawesome/free-solid-svg-icons'
 import {faCircle, faSquare} from '@fortawesome/free-regular-svg-icons'
 import {constructClassString} from '../../utilities'
@@ -51,6 +58,13 @@ export const CIRCLE = faCircle
 export const SQUARE = faSquare
 export const BASKETBALL = faBasketball
 export const WATER_POLO = faVolleyball
+export const MEDAL = faMedal
+export const HOCKEY = faHockeyPuck
+export const BASEBALL = faBaseball
+export const STOPWATCH_20 = faStopwatch20
+export const SOCCER = faFutbol
+export const BOWLING = faBowlingBall
+export const FOOTBALL = faFootball
 
 function Icon(props) {
   return (

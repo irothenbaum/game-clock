@@ -1,56 +1,92 @@
 @use '../../styles/all';
 
+.settings-icon {
+  position: absolute;
+  top: all.$spaceMedium;
+  right: all.$spaceMedium;
+  padding: all.$spaceMedium;
+  font-size: all.$fontSize3;
+  opacity: 0.2;
+
+  &:hover {
+    opacity: 1;
+    animation: rotation 2s infinite linear;
+  }
+}
+
 .settings-container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background-color: all.$offWhite;
-  max-width: all.$screenLargeMin;
-  z-index: 100;
-  padding: all.$spaceLarge 0;
-  padding-bottom: 0;
-  overflow-y: auto;
-  @include all.shadow(0px);
-
-  transform: translateX(100%);
-  transition: all all.$transition;
-
   &.open {
-    @include all.shadow(20px);
-    transform: translateX(0);
+    .settings-panel {
+      @include all.shadow(20px);
+      transform: translateX(0);
+    }
+
+    .settings-overlay {
+      width: 100%;
+      background-color: all.$shadow;
+    }
   }
 
-  .close-icon {
+  .settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color all.$transition;
+    cursor: pointer;
+    z-index: 100;
+  }
+
+  .settings-panel {
     position: absolute;
     top: 0;
     right: 0;
-    font-size: all.$fontSize3;
-    padding: all.$spaceMedium
+    width: 50%;
+    height: 100%;
+    background-color: all.$offWhite;
+    max-width: all.$screenLargeMin;
+    z-index: 100;
+    padding: all.$spaceLarge 0;
+    padding-bottom: 0;
+    overflow-y: auto;
+    @include all.shadow(0px);
+
+    transform: translateX(100%);
+    transition: all all.$transition;
+
+    .close-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: all.$fontSize3;
+      padding: all.$spaceMedium
+    }
+
+    h2 {
+      @include all.heading();
+      padding-left: all.$spaceLarge;
+      margin-bottom: all.$spaceLarge;
+    }
+
+    h3 {
+      @include all.subHeading();
+      margin-bottom: all.$spaceLarge;
+    }
+
+    h4 {
+      font-size: all.$fontSize4;
+      font-family: all.$fontFamilyBold;
+      margin-bottom: all.$spaceMedium;
+    }
+
+    .section {
+      margin-top: all.$spaceLarge;
+      padding: all.$spaceLarge;
+      border-top: 1px solid all.$lightGrey;
+    }
   }
 
-  h2 {
-    @include all.heading();
-    padding-left: all.$spaceLarge;
-    margin-bottom: all.$spaceLarge;
-  }
-
-  h3 {
-    @include all.subHeading();
-    margin-bottom: all.$spaceLarge;
-  }
-
-  h4 {
-    font-size: all.$fontSize4;
-    font-family: all.$fontFamilyBold;
-    margin-bottom: all.$spaceMedium;
-  }
-
-  .section {
-    margin-top: all.$spaceLarge;
-    padding: all.$spaceLarge;
-    border-top: 1px solid all.$lightGrey;
-  }
 }
 

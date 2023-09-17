@@ -79,6 +79,7 @@
   line-height: $width;
   border-radius: layout.$borderRadiusSmall;
   border: 1px solid colors.$lightGrey;
+  background-color: colors.$white;
 }
 
 @mixin input-box() {

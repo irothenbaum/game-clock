@@ -6,6 +6,7 @@ import {constructClassString} from '../../utilities'
 import GameContext from '../../contexts/GameContext'
 import useSoundPlayer, {SOUND_BUZZER} from '../../hooks/useSoundPlayer'
 import Period from './scoreboard/Period'
+import BootLoader from '../BootLoader'
 
 const Scoreboard = forwardRef(function Scoreboard(props, ref) {
   const {isShotClockExpired, isGameClockExpired} = useContext(GameContext)
@@ -33,6 +34,7 @@ const Scoreboard = forwardRef(function Scoreboard(props, ref) {
         ['game-clock-expired']: isGameClockExpired,
       })}
       ref={ref}>
+      <BootLoader />
       <Period />
       <Scores />
       <GameAndShotClocks />

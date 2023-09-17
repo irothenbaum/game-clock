@@ -111,21 +111,22 @@ function PresetSelector(props) {
 
   return (
     <div className="preset-selector">
-      {allPresets.map(k => {
-        const label = presetToLabel[k]
-        const preset = presetToSettings[k]
+      {/* Disabling default presets for now*/}
+      {/* {allPresets.map(k => {*/}
+      {/*  const label = presetToLabel[k]*/}
+      {/*  const preset = presetToSettings[k]*/}
 
-        return (
-          <PresetItem
-            key={k}
-            label={label}
-            icon={presetToIcon[k]}
-            onClick={() => resetToDefault(preset)}
-          />
-        )
-      })}
-      <hr />
-      <h4>Custom Presets</h4>
+      {/*  return (*/}
+      {/*    <PresetItem*/}
+      {/*      key={k}*/}
+      {/*      label={label}*/}
+      {/*      icon={presetToIcon[k]}*/}
+      {/*      onClick={() => resetToDefault(preset)}*/}
+      {/*    />*/}
+      {/*  )*/}
+      {/*})}*/}
+      {/*<hr />*/}
+      {/*<h4>Custom Presets</h4>*/}
       {customPresetIds.length > 0 ? (
         customPresetIds.map(id => {
           return (

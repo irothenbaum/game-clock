@@ -34,16 +34,18 @@
     position: relative;
     z-index: 11;
     padding: all.$spaceMedium;
-    padding-top: all.$spaceLarge;
     border-radius: all.$borderRadiusLarge;
     background-color: all.$white;
+    @include all.shadow();
 
     .close-icon {
-      font-size: all.$fontSize4;
+      @include all.hover-cta();
+      font-size: all.$fontSize5;
       position: absolute;
-      top: 0;
-      right: 0;
+      top: -1 * all.$spaceLarge;
       padding: all.$spaceSmall;
+      right: 0;
+      color: all.$white;
     }
   }
 }
