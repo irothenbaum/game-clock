@@ -13,7 +13,7 @@
     @include all.overlay-fill();
     font-size: 2em;
     border: 1px solid all.$lightGrey;
-    border-radius: 6px;
+    border-radius: all.$borderRadiusMedium;
     overflow: hidden;
 
     .divider {

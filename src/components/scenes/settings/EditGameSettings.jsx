@@ -1,10 +1,10 @@
 import React, {useContext} from 'react'
 import './EditGameSettings.scss'
 import TimeInput from '../../utility/TimeInput'
-import SettingsContext from '../../../SettingsContext'
+import SettingsContext from '../../../contexts/SettingsContext'
 
 function EditGameSettings(props) {
-  const {periodLengthMS, shotClockMS, isSettingsPanelOpen, updateSettings} =
+  const {periodLengthMS, shotClockMS, updateSettings} =
     useContext(SettingsContext)
 
   return (

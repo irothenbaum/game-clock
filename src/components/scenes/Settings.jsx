@@ -5,12 +5,12 @@ import {constructClassString} from '../../utilities'
 import Icon, {CLOSE} from '../utility/Icon'
 import PresetSelector from './settings/PresetSelector'
 import EditQuickActions from './settings/EditQuickActions'
-import SettingsContext from '../../SettingsContext'
 import EditKeyBindings from './settings/EditKeyBindings'
 import EditGameSettings from './settings/EditGameSettings'
+import SessionContext from '../../contexts/SessionContext'
 
 const Settings = forwardRef(function Settings(props, ref) {
-  const {isSettingsPanelOpen, updateSettings} = useContext(SettingsContext)
+  const {isSettingsPanelOpen, updateSession} = useContext(SessionContext)
   return (
     <div
       ref={ref}
@@ -20,7 +20,7 @@ const Settings = forwardRef(function Settings(props, ref) {
       <Icon
         icon={CLOSE}
         className="close-icon"
-        onClick={() => updateSettings({isSettingsPanelOpen: false})}
+        onClick={() => updateSession({isSettingsPanelOpen: false})}
       />
       <h2>Settings</h2>
 

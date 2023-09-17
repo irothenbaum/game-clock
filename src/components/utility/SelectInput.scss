@@ -18,7 +18,7 @@
     max-height: 300px;
     min-height: 100px;
     min-width: 100%;
-    border-radius: 6px;
+    border-radius: all.$borderRadiusMedium;
     border: 1px solid all.$lightGrey;
     overflow-y: auto;
     @include all.shadow();

@@ -1,8 +1,8 @@
 import Clock from './Clock'
 import './GameAndShotClocks.scss'
 import React, {useContext, useEffect} from 'react'
-import SettingsContext from '../../../SettingsContext'
-import GameContext from '../../../GameContext'
+import SettingsContext from '../../../contexts/SettingsContext'
+import GameContext from '../../../contexts/GameContext'
 
 function GameAndShotClocks(props) {
   const {shotClockMS, periodLengthMS} = useContext(SettingsContext)

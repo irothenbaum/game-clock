@@ -1,16 +1,21 @@
 import React, {useContext, useEffect} from 'react'
-import SettingsContext from '../../../SettingsContext'
+import SettingsContext from '../../../contexts/SettingsContext'
 import useActions from '../../../hooks/useActions'
 import {singleClickActions} from '../../../constants/actions'
+import SessionContext from '../../../contexts/SessionContext'
 
 function KeystrokeHandler(props) {
-  const {keyBindings, quickActions, isSettingsPanelOpen, updateSettings} =
+  const {isSettingsPanelOpen, updateSession} = useContext(SessionContext)
+  const {keyBindings, quickActions, updateSettings} =
     useContext(SettingsContext)
   const {execute} = useActions()
 
   useEffect(() => {
     const onKeyDown = e => {
       if (isSettingsPanelOpen) {
+        if (e.key === 'Escape') {
+          updateSession({isSettingsPanelOpen: false})
+        }
         return
       }
 

@@ -100,14 +100,14 @@ function Clock(props) {
     setTimer(TIMER_ANIMATION, () => setAnimateMode(ANIMATE_NONE), 500)
   }, [props.isRunning])
 
-  useEffect(() => {
-    if (!hasInitialized.current) {
-      return
-    }
-
-    setAnimateMode(ANIMATE_RESET)
-    setTimer(TIMER_ANIMATION, () => setAnimateMode(ANIMATE_NONE), 500)
-  }, [props.timeMS])
+  // useEffect(() => {
+  //   if (!hasInitialized.current) {
+  //     return
+  //   }
+  //
+  //   setAnimateMode(ANIMATE_RESET)
+  //   setTimer(TIMER_ANIMATION, () => setAnimateMode(ANIMATE_NONE), 500)
+  // }, [props.timeMS])
   // -------------------------------------------------------------------------------------------------------------
 
   return (

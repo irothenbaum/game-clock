@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import './Period.scss'
 import TeamScore from './TeamScore'
-import GameContext from '../../../GameContext'
+import GameContext from '../../../contexts/GameContext'
 
 function Period(props) {
   const {period, changePeriod} = useContext(GameContext)

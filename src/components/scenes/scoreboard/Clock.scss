@@ -11,7 +11,7 @@
     }
   }
 
-  &.start, &.stop {
+  &.start, &.stop, &.reset {
     &:hover {
       .clock-controls {
         opacity: 0;
@@ -46,7 +46,7 @@
 
     & > span {
       flex-shrink: 0;
-      border-radius: 4px;
+      border-radius: all.$borderRadiusSmall;
       border: 1px solid all.$lightGrey;
       text-align: center;
       background-color: all.$white;
@@ -95,6 +95,7 @@
     display: none;
     align-items: center;
     justify-content: center;
+    font-size: all.$fontSize1;
 
     .icon-container {
       animation: grow 0.3s linear forwards;

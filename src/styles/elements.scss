@@ -64,7 +64,7 @@
   width: 100%;
   height: 100%;
   background-color: $bg;
-  border-radius: 6px;
+  border-radius: layout.$borderRadiusMedium;
   z-index: 10;
   opacity: 0;
   transition: opacity constants.$transition;
@@ -77,14 +77,14 @@
   width: $width;
   text-align: center;
   line-height: $width;
-  border-radius: 4px;
+  border-radius: layout.$borderRadiusSmall;
   border: 1px solid colors.$lightGrey;
 }
 
 @mixin input-box() {
   line-height: 1.5em;
   width: 100%;
-  border-radius: 6px;
+  border-radius: layout.$borderRadiusMedium;
   border: 1px solid colors.$lightGrey;
   padding: layout.$spaceSmall;
   background-color: colors.$white;

@@ -5,14 +5,19 @@ import Settings from './scenes/Settings'
 import SettingsContext, {
   HydratedSettings,
   flushSettings,
-} from '../SettingsContext'
-import GameContext, {flushGame} from '../GameContext'
+} from '../contexts/SettingsContext'
+import SessionContext, {
+  HydratedSession,
+  flushSession,
+} from '../contexts/SessionContext'
+import GameContext, {HydratedGame} from '../contexts/GameContext'
 import Icon, {SETTINGS} from './utility/Icon'
 import {constructClassString} from '../utilities'
 import useClock from '../hooks/useClock'
 import useIncrement from '../hooks/useIncrement'
 import KeystrokeHandler from './scenes/scoreboard/KeystrokeHandler'
 import QuickActions from './scenes/scoreboard/QuickActions'
+import {PortalAnchor} from './utility/Portal'
 
 function GameClock(props) {
   const [settings, setSettings] = useState(HydratedSettings)
@@ -21,6 +26,15 @@ function GameClock(props) {
     setSettings(s => {
       const updatedValue = {...s, ...obj}
       flushSettings(updatedValue)
+      return updatedValue
+    })
+  }
+
+  const [session, setSession] = useState(HydratedSession)
+  const updateSession = obj => {
+    setSession(s => {
+      const updatedValue = {...s, ...obj}
+      flushSession(updatedValue)
       return updatedValue
     })
   }
@@ -47,71 +61,78 @@ function GameClock(props) {
     value: homeScore,
     setValue: setHomeScore,
     change: changeHomeScore,
-  } = useIncrement(0)
+  } = useIncrement(HydratedGame.homeScore)
 
   const {
     value: visitorScore,
     setValue: setVisitorScore,
     change: changeVisitorScore,
-  } = useIncrement(0)
+  } = useIncrement(HydratedGame.visitorScore)
 
   const {
     value: period,
     setValue: setPeriod,
     change: changePeriod,
-  } = useIncrement(0)
+  } = useIncrement(HydratedGame.period)
 
   return (
     <div id="game-clock">
-      <SettingsContext.Provider
+      <SessionContext.Provider
         value={{
-          ...settings,
-          updateSettings: updateSettings,
+          ...session,
+          updateSession: updateSession,
         }}>
-        <GameContext.Provider
+        <SettingsContext.Provider
           value={{
-            isGameClockRunning,
-            stopGameClock,
-            startGameClock,
-            gameClockRemaining,
-            isGameClockExpired,
-            setGameClock,
-
-            isShotClockRunning,
-            stopShotClock,
-            startShotClock,
-            shotClockRemaining,
-            isShotClockExpired,
-            setShotClock,
-
-            homeScore,
-            setHomeScore,
-            changeHomeScore,
-            visitorScore,
-            setVisitorScore,
-            changeVisitorScore,
-
-            period,
-            setPeriod,
-            changePeriod,
+            ...settings,
+            updateSettings: updateSettings,
           }}>
-          <Scoreboard ref={scoreBoardRef} />
-          <Icon
-            icon={SETTINGS}
-            className="settings-icon"
-            onClick={() => updateSettings({isSettingsPanelOpen: true})}
-          />
-          <div
-            className={constructClassString('settings-overlay', {
-              open: settings.isSettingsPanelOpen,
-            })}
-            onClick={() => updateSettings({isSettingsPanelOpen: false})}
-          />
-          <Settings />
-          <KeystrokeHandler />
-          <QuickActions />
-        </GameContext.Provider>
-      </SettingsContext.Provider>
+          <GameContext.Provider
+            value={{
+              isGameClockRunning,
+              stopGameClock,
+              startGameClock,
+              gameClockRemaining,
+              isGameClockExpired,
+              setGameClock,
+
+              isShotClockRunning,
+              stopShotClock,
+              startShotClock,
+              shotClockRemaining,
+              isShotClockExpired,
+              setShotClock,
+
+              homeScore,
+              setHomeScore,
+              changeHomeScore,
+              visitorScore,
+              setVisitorScore,
+              changeVisitorScore,
+
+              period,
+              setPeriod,
+              changePeriod,
+            }}>
+            <Scoreboard ref={scoreBoardRef} />
+            <Icon
+              icon={SETTINGS}
+              className="settings-icon"
+              onClick={() => updateSession({isSettingsPanelOpen: true})}
+            />
+            <div
+              className={constructClassString('settings-overlay', {
+                open: session.isSettingsPanelOpen,
+              })}
+              onClick={() => updateSession({isSettingsPanelOpen: false})}
+            />
+            <Settings />
+            <KeystrokeHandler />
+            <QuickActions />
+            <PortalAnchor />
+          </GameContext.Provider>
+        </SettingsContext.Provider>
+      </SessionContext.Provider>
     </div>
   )
 }

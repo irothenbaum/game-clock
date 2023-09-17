@@ -4,33 +4,18 @@ import QuickActionBind from './QuickActionBind'
 import Icon, {CLOSE, PLUS} from '../../utility/Icon'
 import TextCTA from '../../utility/TextCTA'
 import {v4 as uuid} from 'uuid'
-import {
-  filterCompletedQuickActions,
-  getKeyBindForAction,
-} from '../../../utilities'
-import SettingsContext from '../../../SettingsContext'
+import {getKeyBindForAction} from '../../../utilities'
+import SettingsContext from '../../../contexts/SettingsContext'
 
 function EditQuickActions(props) {
-  const {
-    periodLengthMS,
-    shotClockMS,
-    isSettingsPanelOpen,
-    keyBindings,
-    updateSettings,
-    quickActions,
-  } = useContext(SettingsContext)
-
-  const filteredActions = Object.values(quickActions).filter(
-    filterCompletedQuickActions,
-  )
+  const {keyBindings, updateSettings, quickActions} =
+    useContext(SettingsContext)
 
   /**
-   * @param {QuickAction} a
+   * @param {QuickAction|{id: string}} a
    */
   const handleChangeQuickAction = a => {
-    updateSettings({
-      quickActions: {...quickActions, [a.id]: a},
-    })
+    updateSettings({quickActions: {...quickActions, [a.id]: a}})
   }
 
   /**
@@ -45,9 +30,7 @@ function EditQuickActions(props) {
     const clone = {...quickActions}
     delete clone[id]
 
-    updateSettings({
-      quickActions: clone,
-    })
+    updateSettings({quickActions: clone})
   }
 
   return (

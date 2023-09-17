@@ -16,10 +16,10 @@ $screenLargeMax: 1440px;
 
 $contentWidth: $screenLargeMax;
 
-$borderRadiusExtraLarge: 1.5rem;
-$borderRadiusLarge: 0.8rem;
-$borderRadiusMedium: 0.5rem;
-$borderRadiusSmall: 0.25rem;
+$borderRadiusExtraLarge: 20px;
+$borderRadiusLarge: 10px;
+$borderRadiusMedium: 6px;
+$borderRadiusSmall: 4px;
 
 @mixin large-and-below {
   @media screen and (max-width: $screenLargeMax) {

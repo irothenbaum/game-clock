@@ -3,7 +3,7 @@ import KeyBind from './KeyBind'
 import PropTypes from 'prop-types'
 import {actionLabels} from '../../../constants/actions'
 import {getKeyBindForAction} from '../../../utilities'
-import SettingsContext from '../../../SettingsContext'
+import SettingsContext from '../../../contexts/SettingsContext'
 
 function ActionKeyBind(props) {
   const {keyBindings, updateSettings, quickActions} =

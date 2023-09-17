@@ -3,7 +3,7 @@ import './Scoreboard.scss'
 import Scores from './scoreboard/Scores'
 import GameAndShotClocks from './scoreboard/GameAndShotClocks'
 import {constructClassString} from '../../utilities'
-import GameContext from '../../GameContext'
+import GameContext from '../../contexts/GameContext'
 import useSoundPlayer, {SOUND_BUZZER} from '../../hooks/useSoundPlayer'
 import Period from './scoreboard/Period'
 

@@ -1,7 +1,7 @@
 import TeamScore from './TeamScore'
 import './Scores.scss'
 import React, {useContext} from 'react'
-import GameContext from '../../../GameContext'
+import GameContext from '../../../contexts/GameContext'
 
 function Scores() {
   const {homeScore, changeHomeScore, visitorScore, changeVisitorScore} =

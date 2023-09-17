@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef} from 'react'
-import SettingsContext from '../SettingsContext'
+import SettingsContext from '../contexts/SettingsContext'
 import {v4 as uuid} from 'uuid'
 
 const BASE_PATH = '/public/sounds/'

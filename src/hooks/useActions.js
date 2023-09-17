@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import GameContext from '../GameContext'
+import GameContext from '../contexts/GameContext'
 import {
   ACTION_START_SHOT_CLOCK,
   ACTION_STOP_SHOT_CLOCK,
@@ -13,7 +13,7 @@ import {
   ACTION_SET_SHOT_CLOCK,
   ACTION_RESET_SHOT_CLOCK,
 } from '../constants/actions'
-import SettingsContext from '../SettingsContext'
+import SettingsContext from '../contexts/SettingsContext'
 
 /**
  * @return {{execute: function(string|QuickAction, number?): void}}

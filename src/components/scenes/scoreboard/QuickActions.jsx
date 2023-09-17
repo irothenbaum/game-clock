@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import './QuickActions.scss'
-import SettingsContext from '../../../SettingsContext'
+import SettingsContext from '../../../contexts/SettingsContext'
 import Icon from '../../utility/Icon'
 import useActions from '../../../hooks/useActions'
 import {filterCompletedQuickActions} from '../../../utilities'

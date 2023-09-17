@@ -1,0 +1,59 @@
+@use "../../../styles/all";
+
+.preset-selector {
+  hr {
+    margin: all.$spaceLarge 0;
+  }
+
+  .preset-item {
+    position: relative;
+    margin-bottom: all.$spaceMedium;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: all.$fontSize4;
+
+    p {
+      display: block;;
+      flex: 1;
+      text-align: left;
+      margin-left: all.$spaceMedium;
+    }
+
+    &.has-delete {
+      .delete-preset {
+        font-size: 1.2em;
+        position: absolute;
+        padding: all.$spaceSmall all.$spaceExtraExtraSmall;
+        transition: all all.$transition;
+        opacity: 0;
+        color: red;
+      }
+
+      &:hover .delete-preset {
+        opacity: 1;
+        background-color: all.$offWhite;
+      }
+    }
+  }
+
+  .save-current-settings {
+    margin-top: all.$spaceLarge;
+  }
+}
+
+
+.save-preset-input {
+  margin-top: all.$spaceMedium;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .string-input {
+    margin-left: all.$spaceMedium;
+  }
+}
+
+.save-preset-cta {
+  margin-top: all.$spaceMedium;
+}

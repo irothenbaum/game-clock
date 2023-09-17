@@ -3,7 +3,7 @@ import './EditKeyBindings.scss'
 import {singleClickActions} from '../../../constants/actions'
 import ActionKeyBind from './ActionKeyBind'
 import {filterCompletedQuickActions} from '../../../utilities'
-import SettingsContext from '../../../SettingsContext'
+import SettingsContext from '../../../contexts/SettingsContext'
 
 function EditKeyBindings(props) {
   const {quickActions} = useContext(SettingsContext)
